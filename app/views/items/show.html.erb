@@ -4,8 +4,21 @@
       <div class="text-center">
         <%= @item.name %>
         <%= image_tag @item.image.variant(resize: "500x500") %>
-        <%= link_to "編集", edit_item_path(@item), class: 'btn btn-outline-secondary'%>
-        <%= link_to "削除", item_path(@item),method: :delete,"data-confirm" => "本当に削除しますか?", class: 'btn btn-danger'%>
+        <% if user_signed_in? && current_user.admin? %>
+          <%= link_to "編集", edit_item_path(@item), class: 'btn btn-outline-secondary'%>
+          <%= link_to "削除", item_path(@item),method: :delete,"data-confirm" => "本当に削除しますか?", class: 'btn btn-danger'%>
+        <% end %>
+        <% if user_signed_in? %>
+          <% if @item.favorited_by?(current_user) %>
+            <%= link_to item_favorites_path(@item), method: :delete, class: 'text-danger' do %>
+              <i class="fas fa-heart"></i>
+            <% end %>
+          <% else %>
+            <%= link_to item_favorites_path(@item), method: :post, class: 'text-danger' do %>
+              <i class="far fa-heart"></i>
+            <% end %>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>
