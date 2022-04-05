@@ -1,0 +1,13 @@
+<script>
+  $('#star3').empty();
+  $('#star3').raty({
+    size      : 36,
+    starOff   : '<%= asset_path('star-off.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    starOn    : '<%= asset_path('star-on.png') %>',
+    half      : false,
+    readOnly: true,
+    score: <%= (average) %>,
+  });
+</script>
+<%= (@average).to_f.round(1) %>
