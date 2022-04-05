@@ -8,7 +8,7 @@
           <%= f.label :評価 %>
           <div id="edit-star<%= @review.id %>"></div>
           <script>
-          $('#edit-star').empty();
+          $('#edit-star<%= @review.id %>').empty();
             $('#edit-star<%= @review.id %>').raty({
               size      : 36,
               starOff   : '<%= asset_path('star-off.png') %>',
