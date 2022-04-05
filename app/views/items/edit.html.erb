@@ -1,0 +1,14 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-11">
+      <div>
+        <%= form_with model: @item, local: true do |f| %>
+          <%= f.text_field :name %> <br>
+          <%= image_tag @item.image.variant(resize: "100x100").processed %><br>
+          <%= f.file_field :image %>
+          <%= f.submit '変更', class: 'btn btn-success' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
