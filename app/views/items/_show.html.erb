@@ -1,0 +1,68 @@
+<%= image_tag item.image.variant(resize: "300x300").processed %>
+<p><%= item.name %></p>
+  <% if user_signed_in? && current_user.admin? %>
+    <%= link_to "編集", edit_item_path(item), class: 'btn btn-outline-secondary'%>
+      <%= link_to "削除", item_path(item),method: :delete,"data-confirm" => "本当に削除しますか?", class: 'btn btn-danger'%>
+  <% end %>
+    <% if user_signed_in? %>
+      <% if @item.favorited_by?(current_user) %>
+        <%= link_to item_favorites_path(item), method: :delete, class: 'text-danger' do %>
+          <i class="fas fa-heart"></i>
+        <% end %>
+      <% else %>
+        <%= link_to item_favorites_path(item), method: :post, class: 'text-danger' do %>
+          <i class="far fa-heart"></i>
+        <% end %>
+      <% end %>
+    <% end %>
+    <div align="center" class="mt-5">
+      <%= form_with model: [item,review] do |f| %>
+        <%= f.text_area :comment, rows: 5, class: 'w-50 form-control' %>
+        <div id="star1">
+          <%= f.label :rate,'評価 ', class: 'col-form-label' %>
+        </div>
+        <script>
+        $('#star1').empty();
+          $('#star1').raty({
+            size     : 36,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn: '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            scoreName: 'review[rate]',
+            half: true,
+          });
+        </script>
+         <%= f.submit "評価", class: 'btn btn-outline-info' %>
+      <% end %>
+    </div>
+    <div>
+      <% reviews.each do |review| %>
+        <div class="d-flex justify-content-center">
+          <p>内容:<%= review.comment%></p>
+          <p>評価 :<%= review.rate%>点</p>
+          <div id="star2<%= review.id %>"></div>
+          <script>
+          $(document).on("turbolinks:load", function(){
+            $('star2').empty();
+            $('#star2<%= review.id %>').raty({
+              size      : 36,
+              starOff   : '<%= asset_path('star-off.png') %>',
+              starHalf: '<%= asset_path('star-half.png') %>',
+              starOn    : '<%= asset_path('star-on.png') %>',
+              half      : true,
+              readOnly: true,
+              score: <%= review.rate %>,
+            });
+          });
+          </script>
+          <% if user_signed_in? && current_user.admin? %>
+            <%= link_to "削除",item_review_path(review),method: :delete,"data-confirm" => "本当に削除しますか？", class: 'btn btn-danger' %>
+            <%= link_to "編集",edit_item_review_path(review), class: 'btn btn-info' %><br>
+          <% elsif current_user == review.user %>
+            <%= link_to "削除",item_review_path(review),method: :delete,"data-confirm" => "本当に削除しますか？", class: 'btn btn-danger' %>
+            <%= link_to "編集",edit_item_review_path(review), class: 'btn btn-info' %><br>
+          <% else %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
