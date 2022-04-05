@@ -11,4 +11,8 @@ class Item < ApplicationRecord
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
+  
+  def self.looks(search, word)
+    @item = Item.where("name LIKE?", "%#{word}%")
+  end
 end

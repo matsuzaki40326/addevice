@@ -23,7 +23,7 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    review = Review.find(params[:id])
+    review = Review.find(params[:item_id])
     if review.update(review_params)
       flash[:notice] = "レビューを編集しました。"
       redirect_to request.referer
