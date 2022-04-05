@@ -15,6 +15,8 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @review = Review.new
+    @reviews = Review.where(item_id: @item.id)
   end
 
   def edit
