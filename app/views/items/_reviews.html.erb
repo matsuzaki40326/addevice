@@ -1,0 +1,27 @@
+<% reviews.each do |review| %>
+  <div class="d-flex justify-content-center">
+    <p>内容:<%= review.comment %></p>
+    <p>評価 :<%= review.rate %>点</p>
+    <div id="star2<%= review.id %>"></div>
+    <script>
+      $('#star2<%= review.id %>').empty();
+      $('#star2<%= review.id %>').raty({
+        size      : 36,
+        starOff   : '<%= asset_path('star-off.png') %>',
+        starHalf: '<%= asset_path('star-half.png') %>',
+        starOn    : '<%= asset_path('star-on.png') %>',
+        half      : false,
+        readOnly: true,
+        score: <%= review.rate %>,
+      });
+    </script>
+    <% if user_signed_in? && current_user.admin? %>
+      <%= link_to "削除",item_review_path(review),method: :delete,"data-confirm" => "本当に削除しますか？", class: 'btn btn-danger' %>
+      <%= link_to "編集",edit_item_review_path(review), class: 'btn btn-outline-info' %><br>
+    <% elsif current_user == review.user %>
+      <%= link_to "削除",item_review_path(review),method: :delete,"data-confirm" => "本当に削除しますか？", class: 'btn btn-danger' %>
+      <%= link_to "編集",edit_item_review_path(review), class: 'btn btn-outline-info' %><br>
+    <% else %>
+    <% end %>
+  </div>
+<% end %>
