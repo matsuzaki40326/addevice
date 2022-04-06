@@ -9,6 +9,9 @@
           <%= f.submit '変更', class: 'btn btn-success' %>
         <% end %>
       </div>
+      <% if user_signed_in? && current_user.admin? %>
+        <%= link_to "削除", item_path(@item),method: :delete,"data-confirm" => "本当に削除しますか?", class: 'btn btn-danger'%>
+      <% end %>
     </div>
   </div>
 </div>

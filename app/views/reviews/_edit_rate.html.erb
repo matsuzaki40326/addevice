@@ -1,0 +1,22 @@
+<%= form_with model: review, url: item_review_path, local: true do |f| %>
+  <%= f.label :レビュー内容 %>
+  <%= f.text_area :comment, rows: 5, class: 'form-control w-50' %>
+  <%= f.label :評価 %>
+  <div id="edit-rate<%= review.id %>"></div>
+  <script>
+  $('#edit-rate<%= review.id %>').empty();
+    $('#edit-rate<%= review.id %>').raty({
+      size      : 36,
+      starOff   : '<%= asset_path('star-off.png') %>',
+      starHalf: '<%= asset_path('star-half.png') %>',
+      starOn    : '<%= asset_path('star-on.png') %>',
+      half      : true,
+      score: <%= review.rate %>,
+      scoreName: 'review[rate]',
+    });
+  </script>
+  <span><%= f.submit "変更", class: 'btn btn-outline-info mt-3' %></span>
+<% end %>
+  <% if current_user == @review.user || user.admin? %>
+      <span><%= link_to "削除",item_review_path(@review),method: :delete,"data-confirm" => "本当に削除しますか？", class: 'btn btn-danger mt-5' %></span>
+  <% end %>

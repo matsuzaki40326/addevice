@@ -1,11 +1,23 @@
 <% reviews.each do |review| %>
-  <div class="card">
-    <div class="row ">
-      <%= image_tag review.item.image.variant(resize: "130x130^",gravity: "center", crop: "130x130+0+0").processed %>
-      <div class="card-body">
-        <h5><%= review.item.name %></h5>
-        <div id="star2<%= review.id %>"></div>
-        <p><%= review.comment %></p>
+  <div class="card border-right-0 border-left-0 border-bottom-0 mr-3" style="max-width: 720px">
+    <div class="row">
+      <div class="col-md-2 my-auto">
+        <%= link_to item_path(review.item) do %>
+          <%= image_tag review.item.image.variant(resize: "90x90^",gravity: "center", crop: "90x90+0+0").processed %>
+        <% end %>
+      </div>
+      <div class="col-md-9 ml-3">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between">
+            <p class="font-weight-bold"><%= review.item.name %></p>
+            <p class="ml-auto" id="star2<%= review.id %>"></p>
+            <p class="mr-auto"><%= review.rate %></p>
+            <% if (user_signed_in? && current_user.admin) || current_user == review.user %>
+              <p class="ml-auto"><%= link_to "編集",edit_item_review_path(review), class: 'btn btn-outline-info btn-sm' %></p>
+            <% end %>
+          </div>
+          <p class="mt-2 text-truncate"><%= review.comment %></p>
+        </div>
       </div>
     </div>
   </div>

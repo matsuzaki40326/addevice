@@ -2,32 +2,26 @@
   <div class="row">
     <div class="col-md-3">
       <span><%= image_tag @item.image.variant(resize: "300x300").processed %></span>
-      <p><%= @item.name %></p>
+      <p class="font-weight-bold"><%= @item.name %></p>
       <span id="star3"></span>
       <%= render 'average', average: @average %>
-      <% if user_signed_in? && current_user.admin? %>
-        <%= link_to "編集", edit_item_path(@item), class: 'btn btn-outline-secondary'%>
-        <%= link_to "削除", item_path(@item),method: :delete,"data-confirm" => "本当に削除しますか?", class: 'btn btn-danger'%>
-      <% end %>
       <% if user_signed_in? %>
         <% if @item.favorited_by?(current_user) %>
-          <%= link_to item_favorites_path(@item), method: :delete, class: 'text-danger' do %>
-            <i class="fas fa-heart"></i>
+          <%= link_to item_favorites_path(@item), method: :delete, class: 'text-warning' do %>
+            <i class="fa-solid fa-bookmark"></i>
           <% end %>
         <% else %>
-          <%= link_to item_favorites_path(@item), method: :post, class: 'text-danger' do %>
-            <i class="far fa-heart"></i>
+          <%= link_to item_favorites_path(@item), method: :post, class: 'text-secondary' do %>
+            <i class="fa-regular fa-bookmark"></i>
           <% end %>
         <% end %>
       <% end %>
-    </div>
-    <div class="col-md-8">
-      <div>
-        <%= render 'reviews', reviews: @reviews %>
-      </div>
       <div align="center" class="mt-5">
         <%= render 'form',item: @item, review: @review %>
       </div>
+    </div>
+    <div class="col-md-9">
+        <%= render 'reviews', reviews: @reviews %>
     </div>
   </div>
 </div>
