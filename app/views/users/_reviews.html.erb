@@ -1,0 +1,24 @@
+<% reviews.each do |review| %>
+  <div class="card">
+    <div class="row ">
+      <%= image_tag review.item.image.variant(resize: "130x130^",gravity: "center", crop: "130x130+0+0").processed %>
+      <div class="card-body">
+        <h5><%= review.item.name %></h5>
+        <div id="star2<%= review.id %>"></div>
+        <p><%= review.comment %></p>
+      </div>
+    </div>
+  </div>
+  <script>
+  $('#star2<%= review.id %>').empty();
+  $('#star2<%= review.id %>').raty({
+    size      : 36,
+    starOff   : '<%= asset_path('star-off.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    starOn    : '<%= asset_path('star-on.png') %>',
+    half      : false,
+    readOnly: true,
+    score: <%= review.rate %>,
+  });
+  </script>
+<% end %>
