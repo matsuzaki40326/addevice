@@ -2,25 +2,7 @@
   <div class="row">
     <div class="col-md-11">
       <div class="" align="center">
-        <%= form_with model: @review, url: item_review_path, local: true do |f| %>
-          <%= f.label :レビュー内容 %>
-          <%= f.text_area :comment, rows: 5, class: 'form-control w-50' %>
-          <%= f.label :評価 %>
-          <div id="edit-star<%= @review.id %>"></div>
-          <script>
-          $('#edit-star<%= @review.id %>').empty();
-            $('#edit-star<%= @review.id %>').raty({
-              size      : 36,
-              starOff   : '<%= asset_path('star-off.png') %>',
-              starHalf: '<%= asset_path('star-half.png') %>',
-              starOn    : '<%= asset_path('star-on.png') %>',
-              half      : true,
-              score: <%= @review.rate %>,
-              scoreName: 'review[rate]',
-            });
-          </script>
-          <%= f.submit "変更", class: 'btn btn-outline-info mt-3' %>
-        <% end %>
+        <%= render 'edit_rate', review: @review %>
       </div>
     </div>
   </div>

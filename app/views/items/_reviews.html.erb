@@ -1,8 +1,28 @@
 <% reviews.each do |review| %>
-  <div class="d-flex justify-content-center">
-    <p>内容:<%= review.comment %></p>
-    <p>評価 :<%= review.rate %>点</p>
-    <div id="star2<%= review.id %>"></div>
+  <div class="card ml-5 border-0" style="max-width:640px;">
+    <div class="row">
+      <div class="col-md-1 my-auto">
+        <%= link_to user_path(review.user) do %>
+          <%= image_tag review.user.get_profile_image(50,50), class: 'rounded-circle' %>
+        <% end %>
+      </div>
+      <div class="col-md-11">
+        <div class="card-body">
+          <span>
+            <span class="font-weight-bold"><%= review.user.name %></span>
+            <span class="ml-3" id="star2<%= review.id %>"></span>
+            <span><%= review.rate %></span>
+            <span>
+              <% if (user_signed_in? && current_user.admin) || current_user == review.user %>
+                <%= link_to "編集",edit_item_review_path(review), class: 'btn btn-outline-info btn-sm ml-2' %>
+              <% end %>
+            </span>
+          </span>
+          <p class="mt-2 text-truncate text-break"><%= review.comment %></p>
+        </div>
+      </div>
+    </div>
+  </div>
     <script>
       $('#star2<%= review.id %>').empty();
       $('#star2<%= review.id %>').raty({
@@ -15,13 +35,4 @@
         score: <%= review.rate %>,
       });
     </script>
-    <% if user_signed_in? && current_user.admin? %>
-      <%= link_to "削除",item_review_path(review),method: :delete,"data-confirm" => "本当に削除しますか？", class: 'btn btn-danger' %>
-      <%= link_to "編集",edit_item_review_path(review), class: 'btn btn-outline-info' %><br>
-    <% elsif current_user == review.user %>
-      <%= link_to "削除",item_review_path(review),method: :delete,"data-confirm" => "本当に削除しますか？", class: 'btn btn-danger' %>
-      <%= link_to "編集",edit_item_review_path(review), class: 'btn btn-outline-info' %><br>
-    <% else %>
-    <% end %>
-  </div>
 <% end %>
