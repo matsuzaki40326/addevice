@@ -13,9 +13,9 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    @review = Review.find(params[:item_id])
-    @review.destroy
-    redirect_to request.referer
+    review = Review.find(params[:item_id])
+    review.destroy
+    redirect_to item_path(review.item)
   end
 
   def edit

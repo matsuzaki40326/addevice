@@ -1,18 +1,21 @@
-<%= form_with model: [item,review] do |f| %>
-  <%= f.text_area :comment, rows: 5, class: 'form-control' %>
-  <div id="star1" class="my-3">
-    <%= f.label :rate,'評価 ', class: 'col-form-label' %>
-  </div>
-  <script>
-  $('#star1').empty();
-    $('#star1').raty({
-      size     : 36,
-      starOff:  '<%= asset_path('star-off.png') %>',
-      starOn: '<%= asset_path('star-on.png') %>',
-      starHalf: '<%= asset_path('star-half.png') %>',
-      scoreName: 'review[rate]',
-      half: false,
-    });
-  </script>
-   <%= f.submit "レビュー", class: 'btn btn-outline-info' %>
-<% end %>
+<div class="border-t p-10">
+  <%= form_with model: [item,review] do |f| %>
+    <%= f.label :レビュー内容, class: 'text-gray-400' %>
+    <div class="text-center p-3"><%= f.text_area :comment, rows: 5, placeholder: "Leave a comment...", class: 'w-80  p-2 border text-purple-800 text-sm rounded-md placeholder-gray-400' %></div>
+    <div id="star1" class="flex justify-center">
+      <%= f.label :rate,'評価 ', class: '' %>
+    </div>
+    <script>
+    $('#star1').empty();
+      $('#star1').raty({
+        size     : 36,
+        starOff:  '<%= asset_path('star-off.png') %>',
+        starOn: '<%= asset_path('star-on.png') %>',
+        starHalf: '<%= asset_path('star-half.png') %>',
+        scoreName: 'review[rate]',
+        half: false,
+      });
+    </script>
+     <div class="text-center mt-3"><%= f.submit "レビュー", class: 'px-4 py-2 bg-transparent text-pur1 border border-pur1 rounded hover:text-white hover:bg-pur1' %></div>
+  <% end %>
+</div>

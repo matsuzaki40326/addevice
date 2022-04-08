@@ -1,19 +1,14 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-md-3">
-      <div></div>
-      </div>
-    <div class="col-md-8">
-        <div class="d-flex">
-        <% @items.each do |item| %>
-          <div class="mx-3">
-            <%= link_to item_path(item) do %>
-              <%= image_tag item.image.variant(resize: "200x200^",gravity: "center", crop: "200x200+0+0").processed %>
-            <% end %>
-            <p class="text-center"><%= item.name %></p>
-          </div>
+<div class="container mx-auto mt-5 mb-5">
+  <div class="flex w-full flex-wrap gap-6 ml-10">
+    <% @items.each do |item| %>
+      <div class="border shadow-lg rounded-md">
+        <%= link_to item_path(item) do %>
+          <%= image_tag item.image.variant(resize: "200x200^", gravity: "center", crop: "200x200+0+0").processed, class: 'hover:opacity-75' %>
         <% end %>
+        <div class="py-4 text-sm text-center mt-2">
+          <span class="text-gray-500"><%= item.name %></span>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>

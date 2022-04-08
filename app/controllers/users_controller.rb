@@ -14,8 +14,10 @@ class UsersController < ApplicationController
 
   def update
     user = User.find(params[:id])
-    user.update(user_params)
-    redirect_to user_path(user)
+    if user.update(user_params)
+       flash[:notice] = "プロフィールを編集しました。"
+       redirect_to user_path(user)
+    end
   end
 
   def favorites
@@ -23,9 +25,9 @@ class UsersController < ApplicationController
     favorites = Favorite.where(user_id: @user.id).pluck(:item_id)
     @favorite_items = Item.find(favorites)
   end
-  
+
   private
-  
+
   def user_params
     params.require(:user).permit(:name, :profile_image)
   end
