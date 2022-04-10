@@ -14,6 +14,19 @@
     <% if (user_signed_in? && current_user.admin) || current_user == review.user %>
       <span class="ml-auto"><%= link_to "編集",edit_item_review_path(review), class: 'text-pur1 hover:text-purple-800' %></span>
     <% end %>
+    <% if review.good_by?(current_user) && user_signed_in? %>
+      <p class="mt-auto">
+        <%= link_to item_review_goods_path(review,review.item), method: :delete, class: 'text-gray-400' do %>
+          <i class="fa-solid fa-thumbs-up"></i><%= review.goods.count %>
+        <% end %>
+      </p>
+    <% else %>
+      <p class="mt-auto">
+        <%= link_to item_review_goods_path(review,review.item), method: :post, class: 'text-gray-400' do %>
+          <i class="fa-regular fa-thumbs-up"></i><%= review.goods.count %>
+        <% end %>
+      </p>
+    <% end %>
   </div>
 
   <script>
