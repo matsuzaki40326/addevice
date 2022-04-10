@@ -3,7 +3,7 @@
       <div class="col-span-1">
         <%= image_tag @user.get_profile_image(200,200), class: 'rounded-full mx-auto' %>
           <p class="text-center text-pur1 mt-1"><%= @user.name %></p>
-          <% if current_user == @user %>
+          <% if current_user == @user || current_user.admin? %>
             <p class="text-center text-pur1 hover:text-purple-800 mt-10"><%= link_to "プロフィール変更", edit_user_path(@user) %></p>
             <p class="text-center text-pur1 hover:text-purple-800 mt-3">
               <%= link_to "ブックマーク", favorites_user_path(@user) %>

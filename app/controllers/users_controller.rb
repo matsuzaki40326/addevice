@@ -26,9 +26,20 @@ class UsersController < ApplicationController
     @favorite_items = Item.find(favorites)
   end
 
+  def withdrawal
+    @user = User.find(params[:id])
+    @user.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "退会しました。"
+    redirect_to root_path
+  end
+
+  def unsubscribe
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:name, :profile_image)
+    params.require(:user).permit(:name, :profile_image, :is_deleted)
   end
 end
