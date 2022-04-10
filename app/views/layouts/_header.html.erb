@@ -14,9 +14,11 @@
           <li class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"><%= link_to " 一覧", root_path %></li>
           <li class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"><%= link_to "アイテム登録", new_item_path %></li>
           <li class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"><%= link_to "ユーザ一覧",users_path %></li>
+          <li class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"><%= link_to "マイページ",current_user %></li>
           <li class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"><%= link_to "ログアウト",destroy_user_session_path, method: :delete %></li>
         <% elsif user_signed_in?  %>
           <li class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"><%= link_to "一覧", root_path %></li>
+          <li class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"><%= link_to "マイページ",current_user %></li>
           <li class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"><%= link_to "ログアウト",destroy_user_session_path, method: :delete %></li>
         <% else %>
           <li class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"><%= link_to "一覧", root_path %></li>
