@@ -2,7 +2,7 @@
   <div class="flex border shadow-md mb-3 rounded-md p-5 ml-2">
     <div class="h-full my-auto">
       <%= link_to item_path(review.item) do %>
-        <%= image_tag review.item.image.variant(resize: "110x110^", gravity: "center", crop: "110x110+0+0").processed, class: 'hover:opacity-75'  %>
+        <%= image_tag review.item.image.variant(resize: "110x110^", gravity: "center", crop: "110x110+0+0").processed, class: 'hover:opacity-75' %>
       <% end %>
     <p class="font-bold mt-1 whitespace-nowrap text-center text-sm text-gray-400"><%= review.item.name %></p>
     </div>

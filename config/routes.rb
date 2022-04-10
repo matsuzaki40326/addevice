@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => {
+    :sessions => 'users/sessions'
+  }
   root to: 'items#index'
   get 'search' => 'searches#search', as: 'search'
+  get 'users/:id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
+  patch 'users/:id/withdrawal' => 'users#withdrawal', as: 'withdrawal'
   resources :users, only: [:index, :show, :edit, :update] do
     member do
      get :favorites
