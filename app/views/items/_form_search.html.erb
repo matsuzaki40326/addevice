@@ -1,0 +1,8 @@
+<div class="form-inline">
+  <%= form_with url: search_path, local: true, method: :get do |f| %>
+    <%= f.text_field :word,class: 'w-6/12  p-2 border text-purple-800 text-sm rounded-md placeholder-gray-400' %>
+    <%= f.button :type => "submit", class: 'text-pur1' do %>
+      <i class="fa-solid fa-magnifying-glass"></i>
+    <% end %>
+  <% end %>
+</div>
