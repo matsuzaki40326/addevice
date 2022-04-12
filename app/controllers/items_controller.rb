@@ -1,6 +1,10 @@
 class ItemsController < ApplicationController
   def new
     @item = Item.new
+    @category = Category.new
+    @categories = Category.all
+    @maker = Maker.new
+    @makers = Maker.all
   end
 
   def create
@@ -39,7 +43,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :image)
+    params.require(:item).permit(:name, :image, :category_id, :maker_id)
   end
 
 end
