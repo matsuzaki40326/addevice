@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_action :only_admin
   def create
     category = Category.new(category_params)
     category.save
@@ -16,5 +17,11 @@ class CategoriesController < ApplicationController
 
   def category_params
     params.require(:category).permit(:name)
+  end
+
+  def only_admin
+    unless current_user.admin
+      redirect_to user_path(current_user)
+     end
   end
 end

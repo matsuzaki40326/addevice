@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :ensure_guest_user
   def create
     @item = Item.find(params[:item_id])
     @review = current_user.reviews.new(review_params)
@@ -37,5 +37,11 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.require(:review).permit(:comment, :rate)
+  end
+
+  def ensure_guest_user
+    if current_user.name == "ゲスト"
+      redirect_to user_path(current_user), notice: 'レビュー機能の使用はユーザー登録が必要です。'
+    end
   end
 end
