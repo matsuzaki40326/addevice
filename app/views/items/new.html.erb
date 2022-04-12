@@ -28,7 +28,11 @@
         <tbody>
           <% @makers.each do |maker| %>
             <tr>
-              <td class="px-40"><%= maker.name %></td>
+              <td class="px-40">
+                <%= link_to maker_path(maker), method: :delete, "data-confirm" => "削除しますか？", class: 'text-pur1 hover:text-purple:500' do %>
+                  <%= maker.name %>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>
@@ -50,7 +54,7 @@
           <% @categories.each do |category| %>
             <tr>
               <td class="px-40">
-                <%= link_to category_path(category), method: :delete, "data-confirm" => "削除しますか？" do %>
+                <%= link_to category_path(category), method: :delete, "data-confirm" => "削除しますか？", class: 'text-pur1 hover:text-purple:500' do %>
                   <%= category.name %>
                 <% end %>
               </td>

@@ -7,12 +7,14 @@
           <%= f.label :profileimage %><br>
           <%= image_tag @user.profile_image.variant(resize: "300x300^",gravity: "center", crop: "300x300+0+0").processed, class: 'rounded-full mr-5 mt-3' %>
           <div class="mt-10 mb-5"><%= f.file_field :profile_image, accept: "image/*" %></div>
-          <span>
-            <%= f.label :is_deleted, "有効", value: true %>
-            <%= f.radio_button :is_deleted, false %>
-            <%= f.label :is_deleted, "退会", value: false %>
-            <%= f.radio_button :is_deleted, true %>
-          </span><br>
+          <% if current_user.admin? %>
+            <span>
+              <%= f.label :is_deleted, "有効", value: true %>
+              <%= f.radio_button :is_deleted, false %>
+              <%= f.label :is_deleted, "退会", value: false %>
+              <%= f.radio_button :is_deleted, true %>
+            </span><br>
+          <% end %>
           <button class="mt-5"><%= f.submit "変更", class: 'px-4 py-2 bg-transparent text-pur1 border border-pur1 rounded hover:text-white hover:bg-pur1' %></button>
         <% end %>
         <div class="mt-5"><%= link_to "退会する",withdrawal_path(@user),method: :patch, "data-confirm" => "退会しますか？", class: 'ml-auto px-4 py-2.5 bg-transparent text-red-400 border border-red-400 rounded hover:text-white hover:bg-red-400' %></div>
