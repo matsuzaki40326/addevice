@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   }
   root to: 'items#index'
   get 'search' => 'searches#search', as: 'search'
+  get 'filter' => 'searches#filter', as: 'filter'
   get 'users/:id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
   patch 'users/:id/withdrawal' => 'users#withdrawal', as: 'withdrawal'
   resources :users, only: [:index, :show, :edit, :update] do
@@ -17,6 +18,8 @@ Rails.application.routes.draw do
       resource :goods, only: [:create, :destroy]
     end
   end
+  resources :makers, only: [:new, :create, :destroy]
+  resources :categories, only: [:new, :create, :destroy]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
