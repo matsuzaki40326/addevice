@@ -1,7 +1,7 @@
 <div class="container mt-10 mb-5 mx-auto">
   <%= render 'layouts/error', obj: @item %>
   <div class="grid grid-cols-3 text-gray-400">
-    <div class="col-span-1 my-auto h-full mt-2.5">
+    <div class="col-span-1 my-auto h-full mt-1.5">
         <%= form_with model: @item, local: true do |f| %>
           <%= f.label :製品名, class: 'text-pink-300' %>
           <%= f.text_field :name, class: 'w-1/2 bg-twibg text-gray-400 rounded text-sm focus:ring-4 focus:ring-purple-400 p-2 duration-300 ' %><br>

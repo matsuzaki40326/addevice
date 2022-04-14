@@ -8,9 +8,9 @@
       <div class="mt-10 mb-5"><%= f.file_field :profile_image, accept: "image/*" %></div>
       <% if current_user.admin? %>
         <span>
-          <%= f.label :is_deleted, "有効", value: true %>
+          <%= f.label :is_deleted, "有効", value: false %>
           <%= f.radio_button :is_deleted, false %>
-          <%= f.label :is_deleted, "退会", value: false %>
+          <%= f.label :is_deleted, "退会", value: true %>
           <%= f.radio_button :is_deleted, true %>
         </span><br>
       <% end %>

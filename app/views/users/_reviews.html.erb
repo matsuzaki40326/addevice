@@ -13,8 +13,8 @@
     <p class="w-96 text-gray-400 text-sm line-clamp-4 mx-auto mt-3 h-full hover:opacity-75">
       <a class="js-modal-open" data-target="#modal_<%= review.id %>" href=""><%= review.comment %></a>
     </p>
-    <% if (user_signed_in? && current_user.admin) || current_user == review.user %>
-      <span class="ml-auto p-3"><%= link_to "編集",edit_item_review_path(review), class: 'text-gray-400 hover:opacity-75' %></span>
+    <% if current_user.admin || current_user == review.user %>
+      <span class="ml-auto p-3"><%= link_to "編集",edit_item_review_path(review.item.id, review), class: 'text-gray-400 hover:opacity-75' %></span>
     <% end %>
   </div>
 
