@@ -6,6 +6,9 @@ class User < ApplicationRecord
 
   has_many :favorites, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :goods, dependent: :destroy
+
+  validates :name, uniqueness: true
 
   has_one_attached :profile_image
 
@@ -15,5 +18,20 @@ class User < ApplicationRecord
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     profile_image.variant(resize_to_fill: [width, height]).processed
+  end
+
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
+
+  def self.guest
+    find_or_create_by!(name: 'ゲスト',email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "ゲスト"
+    end
+  end
+
+  def self.looks(search,word)
+    User.where("name LIKE?", "%#{word}%")
   end
 end

@@ -1,6 +1,12 @@
 class ItemsController < ApplicationController
+  before_action :only_admin, except: [:index, :show]
+
   def new
     @item = Item.new
+    @category = Category.new
+    @categories = Category.all
+    @maker = Maker.new
+    @makers = Maker.all
   end
 
   def create
@@ -39,6 +45,13 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :image)
+    params.require(:item).permit(:name, :image, :category_id, :maker_id)
   end
+
+  def only_admin
+    unless current_user.admin
+      redirect_to user_path(current_user)
+     end
+  end
+
 end

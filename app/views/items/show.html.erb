@@ -1,32 +1,32 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-md-3">
-      <span><%= image_tag @item.image.variant(resize: "300x300").processed %></span>
-      <p><%= @item.name %></p>
-      <span id="star3"></span>
-      <%= render 'average', average: @average %>
-      <% if user_signed_in? && current_user.admin? %>
-        <%= link_to "編集", edit_item_path(@item), class: 'btn btn-outline-secondary'%>
-        <%= link_to "削除", item_path(@item),method: :delete,"data-confirm" => "本当に削除しますか?", class: 'btn btn-danger'%>
-      <% end %>
-      <% if user_signed_in? %>
-        <% if @item.favorited_by?(current_user) %>
-          <%= link_to item_favorites_path(@item), method: :delete, class: 'text-danger' do %>
-            <i class="fas fa-heart"></i>
+<div class="container mx-auto mt-5 mb-5">
+    <div class="grid grid-cols-7 grid-flow-col">
+      <div class="col-span-2 mr-3 shadow-lg bg-twibg rounded-md">
+        <div class="">
+          <%= image_tag @item.image.variant(resize: "250x250^", gravity: "center", crop: "250x250+0+0").processed, class: 'w-full rounded' %>
+        </div>
+        <div class="relative text-center">
+          <p class=" text-gray-300 mt-3 font-bold"><%= @item.name %></p>
+          <p class="flex mt-5 justify-center" id="star3"></p>
+        <%= render 'average', average: @average %>
+          <% if user_signed_in? %>
+            <% if @item.favorited_by?(current_user) %>
+              <%= link_to item_favorites_path(@item), method: :delete, class: 'text-ratyyellow absolute top-0 right-2 text-2xl' do %>
+                <i class="fa-solid fa-bookmark"></i>
+              <% end %>
+             <% else %>
+              <%= link_to item_favorites_path(@item), method: :post, class: 'text-gray-400 hover:text-ratyyellow absolute top-0 right-2 text-2xl' do %>
+                <i class="fa-regular fa-bookmark"></i>
+              <% end %>
+            <% end %>
           <% end %>
-        <% else %>
-          <%= link_to item_favorites_path(@item), method: :post, class: 'text-danger' do %>
-            <i class="far fa-heart"></i>
+          <% if user_signed_in? && current_user.admin? %>
+            <%= link_to "編集", edit_item_path(@item), class: 'text-gray-400 hover:opacity-75 absolute bottom-0 right-2' %>
           <% end %>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="col-md-8">
-      <div>
-        <%= render 'reviews', reviews: @reviews %>
-      </div>
-      <div align="center" class="mt-5">
+        </div>
         <%= render 'form',item: @item, review: @review %>
+      </div>
+      <div class="col-span-5">
+        <%= render 'reviews', reviews: @reviews %>
       </div>
     </div>
   </div>
