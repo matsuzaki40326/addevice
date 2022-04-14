@@ -13,25 +13,15 @@
     <p class="w-96 text-sm text-gray-400 line-clamp-4 mx-auto mt-3 hover:opacity-75">
        <a class="js-modal-open" data-target="#modal_<%= review.id %>" href=""><%= review.comment %></a>
     </p>
-    <% if (user_signed_in? && current_user.admin) || current_user == review.user %>
-      <span class="ml-auto"><%= link_to "編集",edit_item_review_path(review), class: 'text-gray-400 hover:opacity-75' %></span>
+    <% if current_user.admin || current_user == review.user %>
+      <span class="ml-auto"><%= link_to "編集",edit_item_review_path(review.item.id, review), class: 'text-gray-400 hover:opacity-75' %></span>
     <% end %>
-    <% if review.good_by?(current_user) && user_signed_in? %>
-      <p class="mt-auto">
-        <%= link_to item_review_goods_path(review,review.item), method: :delete, class: 'text-ratyyellow' do %>
-          <i class="fa-solid fa-thumbs-up mx-3"></i><%= review.goods.count %>
-        <% end %>
-      </p>
-    <% else %>
-      <p class="mt-auto">
-        <%= link_to item_review_goods_path(review,review.item), method: :post, class: 'text-gray-400 hover:text-ratyyellow ' do %>
-          <i class="fa-regular fa-thumbs-up mx-3"></i><%= review.goods.count %>
-        <% end %>
-      </p>
-    <% end %>
+    <span id="good_btn<%= review.id %>">
+      <%= render '/items/good_btn', review: review %>
+    </span>
   </div>
 
-  <%= render 'modal', review: review %>
+  <%= render '/items/modal', review: review %>
 
   <script>
   $('#star2<%= review.id %>').empty();
@@ -45,14 +35,14 @@
     score: <%= review.rate %>,
   });
   $(function(){
- $('.js-modal-open').on('click',function(){
-   $($(this).data('target')).fadeIn();
-   return false;
- });
- $('.js-modal-close').on('click',function(){
-   $('.js-modal').fadeOut();
-   return false;
- });
-});
+   $('.js-modal-open').on('click',function(){
+     $($(this).data('target')).fadeIn();
+     return false;
+   });
+   $('.js-modal-close').on('click',function(){
+     $('.js-modal').fadeOut();
+     return false;
+   });
+  });
   </script>
 <% end %>

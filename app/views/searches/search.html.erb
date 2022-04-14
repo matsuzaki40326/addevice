@@ -7,14 +7,14 @@
         <% @categories.each do |category| %>
           <div>
             <%= f.check_box :category_ids,{ multiple: true, include_hidden: false }, category.id %>
-            <%= f.label category.name, class: 'text-pink-300 text-sm' %>
+            <%= f.label category.name, class: 'text-pink-300 text-sm', for: "search_category_ids_#{category.id}" %>
           </div>
         <% end %>
         <p class="text-lg font-bold text-gray-300 mt-3">メーカー</p>
         <% @makers.each do |maker| %>
           <div>
             <%= f.check_box :maker_ids,{ multiple: true, include_hidden: false }, maker.id %>
-            <%= f.label maker.name, class: 'text-pink-300 text-sm' %>
+            <%= f.label maker.name, class: 'text-pink-300 text-sm', for: "search_maker_ids_#{maker.id}" %>
           </div>
         <% end %>
         <%= button_tag(type: "submit") do %>

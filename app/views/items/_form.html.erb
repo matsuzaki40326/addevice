@@ -1,9 +1,9 @@
-<div class="border-t border-gray-600 p-10">
-  <%= form_with model: [item,review] do |f| %>
-    <%= f.label :レビュー内容, class: 'text-gray-400' %>
+<div class="border-t border-gray-600 px-5">
+  <%= form_with model: [item,review], local: false do |f| %>
+    <p class="mt-7 mb-5"><%= f.label :レビュー内容, class: 'text-gray-400' %></p>
     <div class="text-center p-3"><%= f.text_area :comment, rows: 5, placeholder: "Leave a comment...", class: 'w-full p-2 bg-gray-700 text-gray-400 text-sm focus:ring-4 focus:ring-purple-400 duration-300 rounded-md placeholder-gray-400' %></div>
-    <div id="star1" class="flex justify-center">
-      <%= f.label :rate,'評価 ', class: '' %>
+    <div id="star1" class="flex justify-center mt-3">
+      <%= f.label :rate,'評価 '%>
     </div>
     <script>
     $('#star1').empty();
@@ -16,7 +16,7 @@
         half: false,
       });
     </script>
-     <div class="text-center mt-5">
+     <div class="text-center mt-7">
        <%= button_tag(type: "submit") do %>
          <div class="<%= btn %>">レビュー</div>
         <% end %>
