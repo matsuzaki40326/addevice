@@ -1,24 +1,25 @@
 <div class="container mt-5 mx-auto">
-    <div class="grid">
-      <div class="mx-auto">
-        <%= form_with model: @user, local: true do |f| %>
-          <%= f.label :"name", class: 'text-gray-400' %>
-          <%= f.text_field :name, class: 'bg-gray-100 border border-gray-200 rounded text-gray-800 text-sm focus:ring-pur1 focus:border-pur1 block w-full p-2 mt-1' %><br>
-          <%= f.label :profileimage %><br>
-          <%= image_tag @user.profile_image.variant(resize: "300x300^",gravity: "center", crop: "300x300+0+0").processed, class: 'rounded-full mr-5 mt-3' %>
-          <div class="mt-10 mb-5"><%= f.file_field :profile_image, accept: "image/*" %></div>
-          <% if current_user.admin? %>
-            <span>
-              <%= f.label :is_deleted, "有効", value: true %>
-              <%= f.radio_button :is_deleted, false %>
-              <%= f.label :is_deleted, "退会", value: false %>
-              <%= f.radio_button :is_deleted, true %>
-            </span><br>
-          <% end %>
-          <button class="mt-5"><%= f.submit "変更", class: 'px-4 py-2 bg-transparent text-pur1 border border-pur1 rounded hover:text-white hover:bg-pur1' %></button>
-        <% end %>
-        <div class="mt-5"><%= link_to "退会する",withdrawal_path(@user),method: :patch, "data-confirm" => "退会しますか？", class: 'ml-auto px-4 py-2.5 bg-transparent text-red-400 border border-red-400 rounded hover:text-white hover:bg-red-400' %></div>
-      </div>
-    </div>
+  <div class="text-center text-gray-400">
+    <%= form_with model: @user, local: true do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'p-2 bg-gray-700 text-gray-400 text-sm focus:ring-4 focus:ring-purple-400 duration-300 rounded-md mb-5' %><br>
+      <%= f.label :profileimage %><br>
+      <%= image_tag @user.profile_image.variant(resize: "300x300^",gravity: "center", crop: "300x300+0+0").processed, class: 'rounded-full bg-white mx-auto my-5' %>
+      <div class="mt-10 mb-5"><%= f.file_field :profile_image, accept: "image/*" %></div>
+      <% if current_user.admin? %>
+        <span>
+          <%= f.label :is_deleted, "有効", value: true %>
+          <%= f.radio_button :is_deleted, false %>
+          <%= f.label :is_deleted, "退会", value: false %>
+          <%= f.radio_button :is_deleted, true %>
+        </span><br>
+      <% end %>
+      <%= button_tag(type: "submit") do %>
+        <div class="<%= btn %> my-3">変更</div>
+      <% end %>
+    <% end %>
+    <%= link_to withdrawal_path(@user),method: :patch, "data-confirm" => "退会しますか？" do %>
+      <button class="<%= btnd %> mt-3">退会する</button>
+     <% end %>
   </div>
 </div>

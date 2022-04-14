@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   root to: 'homes#top'
   get 'search' => 'searches#search', as: 'search'
   get 'filter' => 'searches#filter', as: 'filter'
-  get 'users/:id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
+  get 'user_search' =>'users#search', as: 'user_search'
   patch 'users/:id/withdrawal' => 'users#withdrawal', as: 'withdrawal'
   resources :users, only: [:index, :show, :edit, :update] do
     member do

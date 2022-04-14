@@ -1,7 +1,7 @@
-<div class="border-t p-10">
+<div class="border-t border-gray-600 p-10">
   <%= form_with model: [item,review] do |f| %>
     <%= f.label :レビュー内容, class: 'text-gray-400' %>
-    <div class="text-center p-3"><%= f.text_area :comment, rows: 5, placeholder: "Leave a comment...", class: 'w-80  p-2 border text-purple-800 text-sm rounded-md placeholder-gray-400' %></div>
+    <div class="text-center p-3"><%= f.text_area :comment, rows: 5, placeholder: "Leave a comment...", class: 'w-full p-2 bg-gray-700 text-gray-400 text-sm focus:ring-4 focus:ring-purple-400 duration-300 rounded-md placeholder-gray-400' %></div>
     <div id="star1" class="flex justify-center">
       <%= f.label :rate,'評価 ', class: '' %>
     </div>
@@ -16,6 +16,10 @@
         half: false,
       });
     </script>
-     <div class="text-center mt-3"><%= f.submit "レビュー", class: 'px-4 py-2 bg-transparent text-pur1 border border-pur1 rounded hover:text-white hover:bg-pur1' %></div>
+     <div class="text-center mt-5">
+       <%= button_tag(type: "submit") do %>
+         <div class="<%= btn %>">レビュー</div>
+        <% end %>
+     </div>
   <% end %>
 </div>

@@ -19,6 +19,9 @@ class UsersController < ApplicationController
     if user.update(user_params)
        flash[:notice] = "プロフィールを編集しました。"
        redirect_to user_path(user)
+     else
+       user = User.find(params[:id])
+       render 'edit'
     end
   end
 
@@ -36,7 +39,8 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
-  def unsubscribe
+  def search
+    @users = User.looks(params[:search], params[:word])
   end
 
   private
@@ -54,7 +58,7 @@ class UsersController < ApplicationController
 
   def ensure_user
     @user = User.find(params[:id])
-    unless @user == current_user
+    unless (@user == current_user) || current_user.admin?
       redirect_to user_path(current_user)
     end
   end

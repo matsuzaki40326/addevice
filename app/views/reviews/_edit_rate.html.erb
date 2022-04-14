@@ -1,28 +1,30 @@
 <div class="container mt-5 mx-auto">
-  <div class="grid">
-    <div class="mx-auto">
-      <%= form_with model: review, url: item_review_path, local: true do |f| %>
-        <%= f.label :レビュー内容, class: 'text-gray-400' %>
-        <%= f.text_area :comment,rows: 5, class: 'border border-gray-200 rounded text-gray-800 text-sm focus:ring-pur1 focus:border-pur1 block w-96 p-2 mt-1' %><br>
-        <%= f.label :評価, class: 'text-gray-400' %>
-        <div class="flex justify-center" id="edit-rate<%= review.id %>"></div>
-        <script>
-        $('#edit-rate<%= review.id %>').empty();
-          $('#edit-rate<%= review.id %>').raty({
-            size      : 36,
-            starOff   : '<%= asset_path('star-off.png') %>',
-            starHalf: '<%= asset_path('star-half.png') %>',
-            starOn    : '<%= asset_path('star-on.png') %>',
-            half      : true,
-            score: <%= review.rate %>,
-            scoreName: 'review[rate]',
-          });
-        </script>
-          <% if current_user.admin? || current_user == review.user %>
-            <button class="mt-10 text-center"><%= f.submit "変更", class: 'px-4 py-2 bg-transparent text-pur1 border border-pur1 rounded hover:text-white hover:bg-pur1' %></button>
-            <%= link_to "削除", item_review_path(review),method: :delete,"data-confirm" => "本当に削除しますか?", class:  'ml-auto mt-auto px-4 py-2.5 bg-transparent text-red-400 border border-red-400 rounded hover:text-white hover:bg-red-400' %>
+  <div class="mx-auto">
+    <%= form_with model: review, url: item_review_path, local: true do |f| %>
+      <%= f.label :レビュー内容, class: 'text-gray-400' %>
+      <%= f.text_area :comment,rows: 8, class: 'bg-gray-700 text-gray-400 text-sm focus:ring-4 focus:ring-purple-400 duration-300 rounded-md block w-96 p-2 mt-2' %><br>
+      <%= f.label :評価, class: 'text-gray-400' %>
+      <div class="flex justify-center mb-5" id="edit-rate<%= review.id %>"></div>
+      <script>
+      $('#edit-rate<%= review.id %>').empty();
+        $('#edit-rate<%= review.id %>').raty({
+          size      : 36,
+          starOff   : '<%= asset_path('star-off.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          starOn    : '<%= asset_path('star-on.png') %>',
+          half      : false,
+          score: <%= review.rate %>,
+          scoreName: 'review[rate]',
+        });
+      </script>
+        <% if current_user.admin? || current_user == review.user %>
+          <%= button_tag(type: "submit") do %>
+            <div class="<%= btn %> mx-1">変更</div>
           <% end %>
-      <% end %>
-    </div>
+          <%= link_to item_review_path(review),method: :delete, "data-confirm" => "本当に削除しますか？" do %>
+            <button class="<%= btnd %> mx-1">削除</button>
+          <% end %>
+        <% end %>
+    <% end %>
   </div>
 </div>

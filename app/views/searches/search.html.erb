@@ -1,41 +1,45 @@
 <div class="container mt-5 mb-5 mx-auto">
   <div class="grid grid-rows-2 h-72">
-    <div class="col-span-1 row-span-2 row-start-2 w-80 h-96 mt-32">
+    <div class="col-span-1 row-span-2 row-start-1 w-80 h-96 mt-32">
+      <div class="mb-5"><%= render 'items/form_search' %></div>
+      <p class="text-lg font-bold text-gray-300">カテゴリー</p>
       <%= form_with scope: :search, url: filter_path, method: :get, local: true do |f| %>
         <% @categories.each do |category| %>
           <div>
-            <%= f.label category.name %>
             <%= f.check_box :category_ids,{ multiple: true, include_hidden: false }, category.id %>
+            <%= f.label category.name, class: 'text-pink-300 text-sm' %>
           </div>
         <% end %>
+        <p class="text-lg font-bold text-gray-300 mt-3">メーカー</p>
         <% @makers.each do |maker| %>
           <div>
-            <%= f.label maker.name %>
             <%= f.check_box :maker_ids,{ multiple: true, include_hidden: false }, maker.id %>
+            <%= f.label maker.name, class: 'text-pink-300 text-sm' %>
           </div>
         <% end %>
-        <%= f.submit "検索" %>
+        <%= button_tag(type: "submit") do %>
+          <div class="<%= btn %> mt-3">検索</div>
+        <% end %>
       <% end %>
     </div>
     <div class="col-start-1 col-end-3 row-start-1 mt-5 ml-7 text-center">
-      <%= render 'items/form_search' %>
-      <p class="text-purple-300 text-3xl h-32 mt-5 col-start-2">Result</p>
+      <p class="text-pink-300 text-3xl h-32 mt-5 col-start-2">Result</p>
     </div>
     <div class="col-start-2 col-end-3 flex">
       <div class="flex w-full flex-wrap gap-6">
         <% if @items.exists? %>
           <% @items.each do |item| %>
-            <div class="border shadow-lg rounded-md">
+            <div class="bg-twibg shadow-lg rounded-md transform hover:scale-110 duration-500">
               <%= link_to item_path(item) do %>
-                <%= image_tag item.image.variant(resize: "200x200^", gravity: "center", crop: "200x200+0+0").processed, class: 'hover:opacity-75' %>
+                <%= image_tag item.image.variant(resize: "200x200^", gravity: "center", crop: "200x200+0+0").processed, class: 'hover:opacity-75 rounded' %>
               <% end %>
               <div class="py-4 text-sm text-center mt-2">
-                <span class="text-gray-500"><%= item.name %></span>
+                <span class="text-gray-300"><%= item.name %></span>
               </div>
             </div>
           <% end %>
         <% else %>
-          <p class="text-center text-bold text-7xl">見つかりませんでした</p>
+          <p class="text-center text-pink-300 text-bold text-3xl">見つかりませんでした</p>
         <% end %>
       </div>
     </div>
