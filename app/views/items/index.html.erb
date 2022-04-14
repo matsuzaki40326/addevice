@@ -1,13 +1,13 @@
 <div class="container mx-auto mt-5 mb-5">
   <div class="text-center"><%= render 'form_search' %></div>
-  <div class="flex w-full flex-wrap gap-6 ml-10">
+  <div class="flex w-full flex-wrap gap-10 ml-10">
     <% @items.each do |item| %>
-      <div class="border shadow-lg rounded-md">
+      <div class="shadow-lg rounded-md bg-twibg mt-5 transform hover:scale-110 hover:opacity-75 duration-500">
         <%= link_to item_path(item) do %>
-          <%= image_tag item.image.variant(resize: "200x200^", gravity: "center", crop: "200x200+0+0").processed, class: 'hover:opacity-75' %>
+          <%= image_tag item.image.variant(resize: "200x200^", gravity: "center", crop: "200x200+0+0").processed, class:  'rounded' %>
         <% end %>
         <div class="py-4 text-sm text-center mt-2">
-          <span class="text-gray-500"><%= item.name %></span>
+          <span class="text-gray-300"><%= item.name %></span>
         </div>
       </div>
     <% end %>

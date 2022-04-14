@@ -1,26 +1,26 @@
-<div class="container mt-5 mb-5 mx-auto">
+<div class="container mt-10 mb-5 mx-auto">
   <%= render 'layouts/error', obj: @item %>
-  <div class="grid grid-cols-2 gap-5">
-    <div class="col-span-2">
-      <div class="">
+  <div class="grid grid-cols-3 text-gray-400">
+    <div class="col-span-1 my-auto h-full mt-2.5">
         <%= form_with model: @item, local: true do |f| %>
-          <%= f.label :name, class: 'text-gray-400' %>
-          <%= f.text_field :name, class: 'w-80  p-2 border text-purple-800 text-sm rounded-md placeholder-gray-400' %>
-          <%= f.file_field :image %>
-          <%= f.collection_select(:maker_id, @makers, :id, :name, {prompt: "--選択してください--"}, {class: 'border'}) %>
-          <%= f.collection_select(:category_id, @categories, :id, :name, {prompt: "--選択してください--"}, {class: 'border'}) %>
-          <%= f.submit '追加', class: 'px-4 py-2 bg-transparent text-pur1 border border-pur1 rounded hover:text-white hover:bg-pur1' %>
+          <%= f.label :製品名, class: 'text-pink-300' %>
+          <%= f.text_field :name, class: 'w-1/2 bg-twibg text-gray-400 rounded text-sm focus:ring-4 focus:ring-purple-400 p-2 duration-300 ' %><br>
+          <%= f.file_field :image, class: 'my-10 ' %><br>
+          <%= f.collection_select(:maker_id, @makers, :id, :name, {prompt: "メーカー"}, {class: 'border text-black p-1 rounded'}) %><br>
+          <%= f.collection_select(:category_id, @categories, :id, :name, {prompt: "カテゴリー"}, {class: 'border mt-3 text-black p-1 rounded'}) %><br>
+          <%= button_tag(type: "submit") do %>
+            <div class="<%= btn %> mt-10"> 追加</div>
+          <% end %>
         <% end %>
-      </div>
     </div>
-    <div class="col-span-1">
+    <div class="col-span-1 my-auto h-full">
         <%= form_with model: @maker, local: true do |f| %>
-          <%= f.label :makername, class: 'text-gray-400' %>
-          <%= f.text_field :name, class: 'w-80  p-2 border text-purple-800 text-sm rounded-md placeholder-gray-400' %>
-          <%= f.submit "追加", class: 'px-4 py-2 bg-transparent text-pur1 border border-pur1 rounded hover:text-white hover:bg-pur1' %>
+          <%= f.label :メーカー, class: 'text-pink-300' %>
+          <%= f.text_field :name, class: 'w-1/2 bg-twibg text-gray-400 rounded text-sm focus:ring-4 focus:ring-purple-400 p-2 duration-300' %>
+          <%= button_tag(type: "submit") do %>
+            <div class="<%= btn %> mx-2"> 追加</div>
+          <% end %>
         <% end %>
-    </div>
-    <div class="col-span-1">
       <table class="table-auto">
         <thead>
           <tr></tr>
@@ -28,8 +28,8 @@
         <tbody>
           <% @makers.each do |maker| %>
             <tr>
-              <td class="px-40">
-                <%= link_to maker_path(maker), method: :delete, "data-confirm" => "削除しますか？", class: 'text-pur1 hover:text-purple:500' do %>
+              <td class="py-1">
+                <%= link_to maker_path(maker), method: :delete, "data-confirm" => "削除しますか？", class: 'hover:opacity-75' do %>
                   <%= maker.name %>
                 <% end %>
               </td>
@@ -38,14 +38,14 @@
         </tbody>
       </table>
     </div>
-    <div class="col-span-1">
+    <div class="col-span-1 my-auto h-full">
         <%= form_with model: @category, local: true do |f| %>
-          <%= f.label :category, class: 'text-gray-400' %>
-          <%= f.text_field :name, class: 'w-80  p-2 border text-purple-800 text-sm rounded-md placeholder-gray-400' %>
-          <%= f.submit "追加", class: 'px-4 py-2 bg-transparent text-pur1 border border-pur1 rounded hover:text-white hover:bg-pur1' %>
+          <%= f.label :カテゴリー, class: 'text-pink-300' %>
+          <%= f.text_field :name, class: 'w-1/2 bg-twibg text-gray-400 rounded text-sm focus:ring-4 focus:ring-purple-400 p-2 duration-300' %>
+          <%= button_tag(type: "submit") do %>
+            <div class="<%= btn %> mx-2"> 追加</div>
+          <% end %>
         <% end %>
-    </div>
-    <div class="col-span-1">
       <table class="table-auto">
         <thead>
           <tr></tr>
@@ -53,8 +53,8 @@
         <tbody>
           <% @categories.each do |category| %>
             <tr>
-              <td class="px-40">
-                <%= link_to category_path(category), method: :delete, "data-confirm" => "削除しますか？", class: 'text-pur1 hover:text-purple:500' do %>
+              <td class="py-1">
+                <%= link_to category_path(category), method: :delete, "data-confirm" => "削除しますか？", class: 'hover:opacity-75' do %>
                   <%= category.name %>
                 <% end %>
               </td>

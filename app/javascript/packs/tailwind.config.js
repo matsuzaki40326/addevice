@@ -15,8 +15,13 @@ module.exports = {
     },
     extend: {
       colors: {
-        cyan: '#9cdbff',
-        pur1: '#a485e3'
+        twi: '#15202b',
+        twibg: '#273340',
+        pur1: '#a485e3',
+        teal300: '#81e6d9',
+        teal400: '#4fd1c5',
+        orange500: '#ed8936',
+        ratyyellow: '#ffb251'
       }
     },
   },
