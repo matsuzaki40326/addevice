@@ -7,7 +7,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @reviews = Review.where(user_id: @user)
+    reviews = Review.where(user_id: @user)
+    @reviews = Kaminari.paginate_array(reviews).page(params[:page]).per(7)
   end
 
   def edit
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
     if user.update(user_params)
        flash[:notice] = "プロフィールを編集しました。"
        redirect_to user_path(user)
-     else
+    else
        user = User.find(params[:id])
        render 'edit'
     end
