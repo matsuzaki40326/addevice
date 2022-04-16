@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all
+    @items = Item.page(params[:page])
   end
 
   def show
@@ -24,6 +24,7 @@ class ItemsController < ApplicationController
     @review = Review.new
     @reviews = Review.where(item_id: @item.id)
     @average = @reviews.average(:rate)
+    @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(5)
   end
 
   def edit
@@ -51,7 +52,7 @@ class ItemsController < ApplicationController
   def only_admin
     unless current_user.admin
       redirect_to user_path(current_user)
-     end
+    end
   end
 
 end

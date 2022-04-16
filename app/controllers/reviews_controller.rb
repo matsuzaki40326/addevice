@@ -4,8 +4,11 @@ class ReviewsController < ApplicationController
     @item = Item.find(params[:item_id])
     review = current_user.reviews.new(review_params)
     review.item_id = @item.id
+    @test = 'test'
     if review.save
       @reviews = Review.where(item_id: @item.id)
+      @average = @reviews.average(:rate)
+      @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(5)
       flash[:notice] = "レビューを投稿しました。"
     else
       redirect_to request.referer

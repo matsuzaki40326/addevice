@@ -1,18 +1,26 @@
-<div class="container mx-auto mt-10">
-    <div class="grid grid-cols-7 grid-flow-col">
-      <div class="col-span-2">
-        <%= image_tag @user.get_profile_image(200,200), class: 'rounded-full mx-auto bg-white' %>
-          <p class="text-center text-pink-300 mt-1"><%= @user.name %></p>
+<div class="container mx-auto mt-10 mb-10">
+  <div class="grid grid-cols-7 grid-flow-col">
+    <div class="col-span-2">
+      <%= image_tag @user.get_profile_image(600,600), class: 'rounded-full w-7/12 mx-auto bg-white' %>
+        <p class="text-center text-pink-200 mt-3"><%= @user.name %></p>
+        <div class="text-center">
           <% if (current_user == @user || current_user.admin?) && current_user.name != "ゲスト" %>
-            <p class="text-center text-gray-400 hover:opacity-75 mt-10"><%= link_to "プロフィール変更", edit_user_path(@user) %></p>
-            <p class="text-center text-gray-400 hover:opacity-75 mt-3">
-              <%= link_to "ブックマーク", favorites_user_path(@user) %>
-            </p>
+            <div class="my-5">
+              <%= link_to edit_user_path(@user), class: 'p-3 px-4 bg-transparent rounded-3xl text-gray-400 hover:bg-twibg' do %>
+                <i class="fa-regular fa-address-card"></i> プロフィール編集
+              <% end %>
+            </div>
+            <div class="mt-5">
+              <%= link_to favorites_user_path(@user), class: 'p-3 px-4 bg-transparent rounded-3xl text-gray-400 hover:bg-twibg' do %>
+                <i class="fa-regular fa-bookmark"></i> ブックマーク
+              <% end %>
+            </div>
           <% end %>
-      </div>
-      <div class="col-span-5">
-        <%= render 'reviews', reviews: @reviews %>
-      </div>
+        </div>
+    </div>
+    <div class="col-span-5">
+      <div class="mb-5"><%= render 'reviews', reviews: @reviews %></div>
+      <%= paginate @reviews %>
     </div>
   </div>
 </div>
