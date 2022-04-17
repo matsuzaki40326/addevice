@@ -1,6 +1,6 @@
 class SearchesController < ApplicationController
   def search
-    @items = Item.looks(params[:search], params[:word])
+    @items = Item.looks(params[:search], params[:word]).page(params[:page]).per(3)
     @categories = Category.all
     @makers = Maker.all
   end
@@ -9,7 +9,7 @@ class SearchesController < ApplicationController
     @categories = Category.all
     @makers = Maker.all
     @search_params = item_search_params
-    @items = Item.search(@search_params)
+    @items = Item.search(@search_params).page(params[:page]).per(3)
   end
 
 

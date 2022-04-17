@@ -10,7 +10,7 @@
       <span class="flex mt-3" id="star2<%= review.id %>"></span>
       <p class="mb-2 text-gray-400 text-center mt-3"><%= review.rate %></p>
     </div>
-    <p class="w-96 text-gray-400 text-sm line-clamp-4 mx-auto mt-3 h-full hover:opacity-75">
+    <p class="lg:w-96 text-gray-400 text-sm line-clamp-4 mx-auto mt-3 lg:h-2/3  hover:opacity-75">
       <a class="js-modal-open" data-target="#modal_<%= review.id %>" href=""><%= review.comment %></a>
     </p>
     <% if current_user.admin || current_user == review.user %>

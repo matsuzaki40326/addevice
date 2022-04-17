@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit, :withdrawal]
   before_action :ensure_user, only: [:edit, :update]
   def index
-    @users = User.all
+    @users = User.page(params[:page]).per(20)
   end
 
   def show
@@ -42,6 +42,7 @@ class UsersController < ApplicationController
 
   def search
     @users = User.looks(params[:search], params[:word])
+    @users = Kaminari.paginate_array(@users).page(params[:page]).per(20)
   end
 
   private

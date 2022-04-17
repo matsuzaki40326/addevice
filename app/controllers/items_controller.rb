@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.page(params[:page])
+    @items = Item.page(params[:page]).per(5)
   end
 
   def show
@@ -24,7 +24,24 @@ class ItemsController < ApplicationController
     @review = Review.new
     @reviews = Review.where(item_id: @item.id)
     @average = @reviews.average(:rate)
-    @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(5)
+    if params[:rate] == "1"
+      @reviews = Review.where(item_id: @item.id, rate: 1)
+      @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
+    elsif params[:rate] == "2"
+      @reviews = Review.where(item_id: @item.id, rate: 2)
+      @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
+    elsif params[:rate] == "3"
+      @reviews = Review.where(item_id: @item.id, rate: 3)
+      @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
+    elsif params[:rate] == "4"
+      @reviews = Review.where(item_id: @item.id, rate: 4)
+      @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
+    elsif params[:rate] == "5"
+      @reviews = Review.where(item_id: @item.id, rate: 5)
+      @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
+    else
+      @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
+    end
   end
 
   def edit
@@ -40,7 +57,7 @@ class ItemsController < ApplicationController
   def destroy
     item = Item.find(params[:id])
     item.destroy
-    redirect_to root_path
+    redirect_to items_path
   end
 
   private

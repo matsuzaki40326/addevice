@@ -1,6 +1,6 @@
 module TailwindHelper
   def btn
-    'px-4 py-2 bg-gradient-to-r bg-twibg border border-gray-700 text-gray-300 hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-300 hover:text-gray-800 hover:border-twi duration-1000 rounded'
+    'px-4 py-2 bg-gradient-to-r bg-twibg border border-gray-600 text-gray-300 hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-300 hover:text-gray-800 hover:border-twi duration-1000 rounded'
   end
 
   def btnd
@@ -8,6 +8,6 @@ module TailwindHelper
   end
 
   def form
-    'bg-twibg text-gray-400 rounded text-sm focus:ring-4 focus:ring-purple-400  p-2  duration-300'
+    'bg-twibg text-gray-400 rounded text-sm focus:ring-4 focus:ring-purple-400 p-2 duration-300'
   end
 end
