@@ -8,9 +8,7 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "jquery";
-import "popper.js";
-import "bootstrap";
-import "../stylesheets/application"
+import '../../assets/stylesheets/application.scss'
 import '@fortawesome/fontawesome-free/js/all'
 window.$ = window.jQuery = require('jquery');
 import 'packs/raty'

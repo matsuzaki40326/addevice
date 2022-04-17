@@ -1,0 +1,10 @@
+<div class="modal js-modal hidden h-screen fixed top-0 w-full" id="modal_<%= review.id %>">
+  <div class="modal__bg js-modal-close bg-gray-800 opacity-75 h-screen absolute w-full"></div>
+  <div class="modal__content text-gray-400 bg-twi right-24 p-40 absolute top-1/2 transform -translate-x-3/4 -translate-y-2/4 w-1/2 rounded-md shadow-md">
+    <p><%= review.comment %></p>
+    <div id="good_btn<%= review.id %>" class="mt-7">
+      <%= render 'items/good_btn', review: review %>
+    </div>
+    <button class="<%= btn %> js-modal-close mt-5">閉じる</button>
+  </div>
+</div>

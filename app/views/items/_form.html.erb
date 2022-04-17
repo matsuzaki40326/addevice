@@ -1,18 +1,24 @@
-<%= form_with model: [item,review] do |f| %>
-  <%= f.text_area :comment, rows: 5, class: 'w-50 form-control' %>
-  <div id="star1">
-    <%= f.label :rate,'評価 ', class: 'col-form-label' %>
-  </div>
-  <script>
-  $('#star1').empty();
-    $('#star1').raty({
-      size     : 36,
-      starOff:  '<%= asset_path('star-off.png') %>',
-      starOn: '<%= asset_path('star-on.png') %>',
-      starHalf: '<%= asset_path('star-half.png') %>',
-      scoreName: 'review[rate]',
-      half: false,
-    });
-  </script>
-   <%= f.submit "レビュー", class: 'btn btn-outline-info' %>
-<% end %>
+<div class="border-t border-gray-600 px-5 pt-3 bg-twibg" id="review_form">
+  <%= form_with model: [item,review], local: false do |f| %>
+    <div class="text-center p-3"><%= f.text_area :comment, placeholder: "レビュー", class: 'w-full lg:h-20 p-2 bg-gray-700 text-gray-400 text-sm focus:ring-4 focus:ring-purple-400 duration-300 rounded-md placeholder-gray-400 placeholder-opacity-50' %></div>
+    <div id="star1" class="flex justify-center mt-3">
+      <%= f.label :rate,'評価 '%>
+    </div>
+    <script>
+    $('#star1').empty();
+      $('#star1').raty({
+        size     : 36,
+        starOff:  '<%= asset_path('star-off.png') %>',
+        starOn: '<%= asset_path('star-on.png') %>',
+        starHalf: '<%= asset_path('star-half.png') %>',
+        scoreName: 'review[rate]',
+        half: false,
+      });
+    </script>
+    <div class="text-center mt-5 w-full">
+      <%= button_tag(type: "submit", class: 'w-2/3') do %>
+        <div class="<%= btn %>"><i class="fa-solid fa-paper-plane"></i></div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
