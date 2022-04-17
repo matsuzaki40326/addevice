@@ -2,28 +2,30 @@ class ReviewsController < ApplicationController
   before_action :ensure_guest_user
   def create
     @item = Item.find(params[:item_id])
-    @review = current_user.reviews.new(review_params)
-    @review.item_id = @item.id
-    if @review.save
+    review = current_user.reviews.new(review_params)
+    review.item_id = @item.id
+    if review.save
+      @reviews = Review.where(item_id: @item.id)
+      @average = @reviews.average(:rate)
+      @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
       flash[:notice] = "レビューを投稿しました。"
-      redirect_to request.referer
     else
       redirect_to request.referer
     end
   end
 
   def destroy
-    review = Review.find(params[:item_id])
+    review = Review.find(params[:id])
     review.destroy
     redirect_to item_path(review.item)
   end
 
   def edit
-    @review = Review.find(params[:item_id])
+    @review = Review.find(params[:id])
   end
 
   def update
-    review = Review.find(params[:item_id])
+    review = Review.find(params[:id])
     if review.update(review_params)
       flash[:notice] = "レビューを編集しました。"
       redirect_to item_path(review.item)

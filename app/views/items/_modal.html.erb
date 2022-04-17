@@ -1,6 +1,6 @@
-<div class="modal js-modal hidden h-screen fixed top-0 w-full" id="modal_<%= review.id %>">
-  <div class="modal__bg js-modal-close bg-gray-800 opacity-75 h-screen absolute w-full"></div>
-  <div class="modal__content text-gray-400 bg-twi left-2/4 p-40 absolute top-1/2 transform -translate-x-3/4 -translate-y-2/4 w-3/5 rounded-md shadow-md">
+<div class="modal js-modal hidden h-screen fixed top-0 w-full z-10" id="modal_<%= review.id %>">
+  <div class="modal__bg js-modal-close bg-gray-800 opacity-75 h-screen absolute w-full z-10"></div>
+  <div class="modal__content text-gray-400 bg-twi left-2/4 p-40 absolute top-1/2 transform -translate-x-2/4 -translate-y-2/4 w-3/5 rounded-md shadow-md z-10">
     <p><%= review.comment %></p>
     <button class="<%= btn %> js-modal-close mt-10">閉じる</button>
   </div>

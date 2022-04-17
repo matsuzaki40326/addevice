@@ -1,0 +1,43 @@
+<div class="mb-5 mx-auto w-full p-5">
+  <table class="h-full mx-auto mt-3 p-5 mb-10">
+    <thead class="font-bold text-gray-200 bg-gradient-to-r from-purple-400 to-pink-300">
+      <tr>
+        <th class="p-3"></th>
+        <th class="p-3">name</th>
+        <th class="p-3">mail address</th>
+        <th class="p-3">status</th>
+        <th class="p-3"><%= render '/users/search' %></th>
+      </tr>
+    </thead>
+    <tbody class="text-gray-200">
+      <% users.each do |user| %>
+        <tr class="border border-gray-700">
+          <td class="px-20 py-3">
+            <%= link_to user_path(user), class: 'hover:opacity-75' do %>
+              <span><%= image_tag user.get_profile_image(80,80), class: 'rounded-full mr-2 hover:opacity-75 bg-white' %></span>
+            <% end %>
+          </td>
+          <td class="px-3 py-3">
+            <%= link_to user_path(user), class: 'hover:opacity-75' do %>
+              <span class="text-gray-200 px-5"><%= user.name %></span>
+            <% end %>
+          </td>
+          <td class="px-10 py-3">
+            <%= user.email %>
+          </td>
+          <td class="px-20 py-3">
+            <% if user.is_deleted == true %>
+              <span class="text-red-400 flex">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </span>
+            <% else %>
+              <span class="text-green-400 flex">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
+              </span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>

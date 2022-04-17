@@ -1,8 +1,8 @@
 <div>
   <%= form_with url: user_search_path, local: true, method: :get do |f| %>
-    <%= f.text_field :word, placeholder: "名前", class: 'w-5/12 p-2 bg-gray-700 text-gray-400 text-sm focus:ring-4 focus:ring-purple-400 duration-300 rounded-md placeholder-gray-400' %>
-    <%= f.button :type => "submit", class: 'text-pur1' do %>
-      <i class="fa-solid fa-magnifying-glass ml-2"></i>
+    <%= f.text_field :word, placeholder: "name", class: 'w-40 p-2 bg-twi text-gray-200 text-sm focus:ring-4 focus:ring-purple-400 duration-300 rounded-md placeholder-gray-400 placeholder-opacity-50' %>
+    <%= f.button :type => "submit", class: 'text-twi h-9 w-9 rounded-full focus:ring-2 focus:ring-twi ml-3' do %>
+      <i class="fa-solid fa-magnifying-glass"></i>
     <% end %>
   <% end %>
 </div>
