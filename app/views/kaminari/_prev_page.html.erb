@@ -7,5 +7,5 @@
     remote:        data-remote
 -%>
 <span class="prev mx-1">
-  <%= link_to_unless current_page.first?, t('views.pagination.previous').html_safe, url, rel: 'prev', remote: remote %>
+  <%= link_to_unless current_page.first?, t('views.pagination.previous').html_safe, url, rel: 'prev', remote: remote, class: 'text-gray-200 px-4 py-2 hover:opacity-75 focus:ring-2 focus:ring-purple-400 rounded' %>
 </span>

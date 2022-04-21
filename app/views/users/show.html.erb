@@ -19,9 +19,6 @@
   </div>
   <div class="">
     <%= render '/users/reviews', reviews: @reviews %>
-    <div class="mx-auto mt-10 text-pink-200 text-lg">
-      <div class="pt-1 bg-gradient-to-r from-purple-300 to-pink-300"></div>
-        <div class="pt-4"><%= paginate @reviews %></div>
-    </div>
+    <div class="pt-10 mt-10 mx-auto text-lg"><%= paginate @reviews %></div>
   </div>
 </div>
