@@ -4,13 +4,20 @@ class ReviewsController < ApplicationController
     @item = Item.find(params[:item_id])
     review = current_user.reviews.new(review_params)
     review.item_id = @item.id
-    if review.save
-      @reviews = Review.where(item_id: @item.id)
-      @average = @reviews.average(:rate)
-      @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
-      flash[:notice] = "レビューを投稿しました。"
+    @review_count = Review.where(item_id: @item.id).count
+    review_count = Review.where(item_id: params[:item_id]).where(user_id: current_user.id).count
+    if review.valid?
+      # if review_count < 1
+       review.save
+       @reviews = Review.where(item_id: @item.id)
+       @average = @reviews.average(:rate)
+       @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
+       flash.now[:notice] = "レビューを投稿しました。"
+      # else
+      #   redirect_to request.referer, alert: "レビューの投稿は1度までです。"
+      # end
     else
-      redirect_to request.referer
+      redirect_to request.referer, alert: "投稿に失敗しました。"
     end
   end
 
@@ -31,7 +38,7 @@ class ReviewsController < ApplicationController
       redirect_to item_path(review.item)
     else
       @review = Review.find(params[:id])
-      render 'edit'
+      redirect_to request.referer, alert: "編集に失敗しました。"
     end
   end
 
@@ -43,7 +50,7 @@ class ReviewsController < ApplicationController
 
   def ensure_guest_user
     if current_user.name == "ゲスト"
-      redirect_to user_path(current_user), notice: 'レビュー機能の使用はユーザー登録が必要です。'
+      redirect_to user_path(current_user), alert: 'レビュー機能の使用はユーザー登録が必要です。'
     end
   end
 end

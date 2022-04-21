@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :goods, dependent: :destroy
 
-  validates :name, uniqueness: true
+  validates :name, uniqueness: true, presence: true
 
   has_one_attached :profile_image
 

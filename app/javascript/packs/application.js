@@ -10,9 +10,17 @@ import "channels"
 import "jquery";
 import '../../assets/stylesheets/application.scss'
 import '@fortawesome/fontawesome-free/js/all'
-window.$ = window.jQuery = require('jquery');
 import 'packs/raty'
+window.$ = window.jQuery = require('jquery');
+
+
+// import 'slick.min.js'
+// import './slick'
+
+
+
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+

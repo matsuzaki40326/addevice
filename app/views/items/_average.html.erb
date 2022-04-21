@@ -1,4 +1,7 @@
- <p class="flex mt-7 mb-3 justify-center" id="star3"></p>
+ <div class="flex justify-center items-center">
+    <span class="flex justify-center my-3 mr-1" id="star3"></span>
+    <div class="text-gray-300 opacity-25">(<%= review_count %>)</div>
+ </div>
 <script>
   $('#star3').empty();
   $('#star3').raty({
@@ -11,4 +14,4 @@
     score: <%= average || 0 %>,
   });
 </script>
-<p class="mb-3 text-gray-400"><%= (average).to_f.round(1) %></p>
+<p class="mb-3 text-gray-300 opacity-75"><%= average.to_f.round(1) %></p>

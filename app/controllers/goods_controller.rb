@@ -16,7 +16,7 @@ class GoodsController < ApplicationController
 
   def ensure_guest_user
     if current_user.name == "ゲスト"
-      redirect_to user_path(current_user), notice: '高評価機能の使用はユーザー登録が必要です。'
+      redirect_to user_path(current_user), alert: '高評価機能の使用はユーザー登録が必要です。'
     end
   end
 end

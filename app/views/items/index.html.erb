@@ -1,17 +1,16 @@
 <div class="container mx-auto mt-5 mb-5">
   <div class="text-center"><%= render 'form_search' %></div>
-  <div class="flex flex-wrap gap-10 ml-10 ">
+  <div class="flex flex-wrap gap-10 ml-10">
     <% @items.each do |item| %>
       <div class="shadow-lg rounded-md bg-twibg mt-5 transform hover:scale-110 hover:opacity-75 duration-500 w-1/6 h-1/6">
-        <%= link_to item_path(item) do %>
+        <%= link_to item_path(item), data: {"turbolinks" => false} do %>
           <%= image_tag item.image.variant(resize: "600x600^", gravity: "center", crop: "600x600+0+0").processed, class: 'rounded' %>
           <div class="py-4 text-sm text-center mt-2">
-            <span class="text-gray-300 font-bold"><%= item.name %></span>
+            <span class="text-gray-300 font-black"><%= item.name %></span>
           </div>
         <% end %>
       </div>
     <% end %>
   </div>
+  <%= paginate @items %>
 </div>
-
-<%= paginate @items %>

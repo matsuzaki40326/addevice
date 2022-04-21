@@ -11,36 +11,47 @@ class ItemsController < ApplicationController
 
   def create
     item = Item.new(item_params)
-    item.save
-    redirect_to request.referer
+    if item.save
+      redirect_to request.referer, notice: "追加しました。"
+    else
+      redirect_to request.referer, alert: "追加に失敗しました。"
+    end
   end
 
   def index
     @items = Item.page(params[:page]).per(5)
+
   end
 
   def show
     @item = Item.find(params[:id])
     @review = Review.new
-    @reviews = Review.where(item_id: @item.id)
-    @average = @reviews.average(:rate)
+    item_reviews = Review.where(item_id: @item.id)
+    @review_count = item_reviews.count
+    @average = item_reviews.average(:rate)
     if params[:rate] == "1"
-      @reviews = Review.where(item_id: @item.id, rate: 1)
-      @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
+      item_reviews = Review.where(item_id: @item.id, rate: 1)
+      @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(10)
+      gon.reviews = item_reviews
     elsif params[:rate] == "2"
-      @reviews = Review.where(item_id: @item.id, rate: 2)
-      @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
+      item_reviews = Review.where(item_id: @item.id, rate: 2)
+      @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(10)
+      gon.reviews = item_reviews
     elsif params[:rate] == "3"
-      @reviews = Review.where(item_id: @item.id, rate: 3)
-      @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
+      item_reviews = Review.where(item_id: @item.id, rate: 3)
+      @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(10)
+      gon.reviews = item_reviews
     elsif params[:rate] == "4"
-      @reviews = Review.where(item_id: @item.id, rate: 4)
-      @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
+      item_reviews = Review.where(item_id: @item.id, rate: 4)
+      @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(10)
+      gon.reviews = item_reviews
     elsif params[:rate] == "5"
-      @reviews = Review.where(item_id: @item.id, rate: 5)
-      @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
+      item_reviews = Review.where(item_id: @item.id, rate: 5)
+      @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(10)
+      gon.reviews = item_reviews
     else
-      @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
+      @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(10)
+      gon.reviews = item_reviews
     end
   end
 
@@ -50,14 +61,17 @@ class ItemsController < ApplicationController
 
   def update
     item = Item.find(params[:id])
-    item.update(item_params)
-    redirect_to request.referer
+    if item.update(item_params)
+      redirect_to items_path, notice: "変更しました。"
+    else
+      redirect_to request.referer, alert: "変更に失敗しました。"
+    end
   end
 
   def destroy
     item = Item.find(params[:id])
     item.destroy
-    redirect_to items_path
+    redirect_to items_path, notice: "削除しました。"
   end
 
   private
