@@ -26,21 +26,37 @@
   <div class="w-3/4">
     <p class="text-pink-200 font-black text-center w-full">Result</p>
     <% if items.exists? %>
-      <div class="flex flex-wrap gap-10 w-full">
-        <% items.each do |item| %>
-          <div class="shadow-lg rounded-md bg-twibg mt-5 transform hover:scale-110 hover:opacity-75 duration-500 w-1/5 h-1/6">
-            <%= link_to item_path(item), data: {"turbolinks" => false} do %>
-              <%= image_tag item.image.variant(resize: "600x600^", gravity: "center", crop: "600x600+0+0").processed, class: 'rounded' %>
-              <div class="py-4 text-sm text-center mt-2">
-                <span class="text-gray-300 font-black"><%= item.name %></span>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
+      <div class="result_scroll result_list my-10">
+        <div class="flex flex-wrap gap-10 w-full">
+          <% items.each do |item| %>
+            <div class="shadow-lg rounded-md bg-twibg mt-5 transform hover:scale-110 hover:opacity-75 duration-500 w-1/5 h-1/6">
+              <%= link_to item_path(item), data: {"turbolinks" => false} do %>
+                <%= image_tag item.image.variant(resize: "600x600^", gravity: "center", crop: "600x600+0+0").processed, class: 'rounded' %>
+                <div class="py-4 text-sm text-center mt-2">
+                  <span class="text-gray-300 font-black"><%= item.name %></span>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <div class="hidden"><%= paginate items %></div>
       </div>
     <% else %>
       <p class="text-center text-pink-200 text-bold text-xl mt-5">見つかりませんでした</p>
     <% end %>
-    <div class="mt-5"><%= paginate items %></div>
   </div>
 </div>
+
+<script>
+  $(window).on('scroll', function() {
+    scrollHeight = $(document).height();
+    scrollPosition = $(window).height() + $(window).scrollTop();
+    if ( (scrollHeight - scrollPosition) / scrollHeight <= 0.05) {
+      $('.result_scroll').jscroll({
+        loadingHtml: '<div class="flex items-center justify-center pt-5"><svg width="24px" height="24px" class="animate-spin viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd" d="M12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="pink"/><path d="M2 12C2 6.47715 6.47715 2 12 2V5C8.13401 5 5 8.13401 5 12H2Z" fill="pink"/></svg></div>',
+        contentSelector: '.result_list',
+        nextSelector: 'span.next:last a'
+      });
+    }
+  });
+</script>

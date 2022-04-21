@@ -2,7 +2,7 @@
   <div class="shadow-lg bg-twibg lg:w-96 rounded-md h-full">
     <%= image_tag @item.image.variant(resize: "800x800^", gravity: "center", crop: "800x800+0+0").processed, class: 'w-full rounded' %>
     <div class="relative text-center py-3">
-      <p class="text-gray-300 mt-3 font-black"><%= @item.name %></p>
+      <p class="text-gray-300 mt-3 font-bold"><%= @item.name %></p>
       <div id="average"><%= render '/items/average', average: @average, review_count: @review_count %></div>
       <span id="favorite_btn<%= @item.id %>"><%= render '/items/favorite_btn', item: @item %></span>
       <% if current_user.admin? %>

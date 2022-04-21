@@ -6,7 +6,7 @@
         <%= link_to item_path(item), data: {"turbolinks" => false} do %>
           <%= image_tag item.image.variant(resize: "600x600^", gravity: "center", crop: "600x600+0+0").processed, class: 'rounded' %>
           <div class="py-4 text-sm text-center mt-2">
-            <span class="text-gray-300 font-black"><%= item.name %></span>
+            <span class="text-gray-300 font-bold"><%= item.name %></span>
           </div>
         <% end %>
       </div>
