@@ -6,7 +6,7 @@
       <%= form_with scope: :search, url: filter_path, method: :get, local: true do |f| %>
         <% categories.each do |category| %>
           <div>
-            <%= f.check_box :category_ids,{ multiple: true, include_hidden: false }, category.id %>
+            <%= f.check_box :category_ids,{ multiple: true, include_hidden: false },category.id %>
             <%= f.label category.name, class: 'text-pink-200 text-sm', for: "search_category_ids_#{category.id}" %>
           </div>
         <% end %>
@@ -17,8 +17,8 @@
             <%= f.label maker.name, class: 'text-pink-200 text-sm', for: "search_maker_ids_#{maker.id}" %>
           </div>
         <% end %>
-        <%= button_tag(type: "submit") do %>
-          <div class="<%= btn %> mt-5">検索</div>
+        <%= button_tag(type: "submit", class: 'mt-5') do %>
+          <div class="<%= btn %>">検索</div>
         <% end %>
       <% end %>
     </div>
@@ -29,10 +29,10 @@
       <div class="flex flex-wrap gap-10 w-full">
         <% items.each do |item| %>
           <div class="shadow-lg rounded-md bg-twibg mt-5 transform hover:scale-110 hover:opacity-75 duration-500 w-1/5 h-1/6">
-            <%= link_to item_path(item) do %>
+            <%= link_to item_path(item), data: {"turbolinks" => false} do %>
               <%= image_tag item.image.variant(resize: "600x600^", gravity: "center", crop: "600x600+0+0").processed, class: 'rounded' %>
               <div class="py-4 text-sm text-center mt-2">
-                <span class="text-gray-300 font-bold"><%= item.name %></span>
+                <span class="text-gray-300 font-black"><%= item.name %></span>
               </div>
             <% end %>
           </div>
@@ -41,5 +41,6 @@
     <% else %>
       <p class="text-center text-pink-200 text-bold text-xl mt-5">見つかりませんでした</p>
     <% end %>
+    <div class="mt-5"><%= paginate items %></div>
   </div>
 </div>

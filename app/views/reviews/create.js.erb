@@ -1,7 +1,8 @@
 console.log($('#reviews_ajax'));
-$('#reviews_ajax').html("<%= j(render '/items/reviews', reviews: @reviews) %>");
+$('.reviews_ajax').html("<%= j(render '/items/reviews', reviews: @reviews) %>");
 $('textarea').val('');
-$('#average').html("<%= j(render '/items/average', average: @average) %>");
+$('#average').html("<%= j(render '/items/average', average: @average, review_count: @review_count) %>");
+$('#flash').html("<%= j(render '/layouts/flash') %>");
 $('#star1').empty();
 $('#star1').raty({
   size     : 36,

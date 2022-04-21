@@ -3,7 +3,7 @@ class Review < ApplicationRecord
   belongs_to :item
   has_many :goods
 
-  validates :comment, presence: { message: 'を入力してください' }
+  validates :comment, presence: true, length: { maximum: 1000 }
   validates :rate, presence: true
 
   def good_by?(user)

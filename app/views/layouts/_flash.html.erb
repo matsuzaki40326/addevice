@@ -1,0 +1,17 @@
+<% flash.each do |key, value| %>
+  <% if key == "notice" %>
+  <div class="pt-2 w-1/2 mx-auto bg-gradient-to-r from-purple-400 to-pink-300 mt-5 rounded-b">
+    <%= content_tag(:p, class: "flex p-4 mb-4 bg-gradient-to-r from-purple-200 to-pink-200 w-full mx-auto rounded-b shadow-md") do %>
+      <span class="pt-3"></span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0 w-5 h-5 text-purple-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <span class="text-purple-800 pl-3"><%= value %></span>
+    <% end %>
+  </div>
+  <% elsif key == "alert" %>
+    <%= content_tag(:p, class: "flex p-4 mb-4 border-t-4 border-red-500 bg-red-100 w-1/2 mx-auto rounded-b mt-5 shadow-md") do %>
+      <span class="pt-3"></span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0 w-5 h-5 text-red-700 text-sm" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <span class="text-red-700 pl-3"><%= value %></span>
+    <% end %>
+  <% end %>
+<% end %>

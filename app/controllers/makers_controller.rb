@@ -2,11 +2,13 @@ class MakersController < ApplicationController
   before_action :only_admin
   def create
     maker = Maker.new(maker_params)
-    maker.save
-    flash[:notice] = "メーカーを追加しました。"
-    redirect_to request.referer
+    if maker.save
+      redirect_to request.referer, notice: "メーカーを追加しました。"
+    else
+      redirect_to request.referer, alert: "追加できませんでした。"
+    end
   end
-  
+
   def destroy
     maker = Maker.find(params[:id])
     maker.destroy
