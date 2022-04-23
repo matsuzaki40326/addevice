@@ -9,19 +9,29 @@ class Item < ApplicationRecord
   belongs_to :maker
   belongs_to :category
 
+  attr_accessor :average
+  attr_accessor :amount
+
 
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
 
-  def self.looks(search, word)
-    Item.joins(:category)
-        .joins(:maker)
-        .where("categories.name LIKE?", "%#{word}%")
-    .or(Item.joins(:category)
-        .joins(:maker)
-        .where("makers.name LIKE?", "%#{word}%"))
-    .or(Item.where("items.name LIKE?", "%#{word}%"))
+
+  def review_rate_average
+    if reviews
+      reviews.average(:rate).to_f.round(1)
+    else
+      0.0
+    end
+  end
+
+  def review_amount
+    if reviews
+      reviews.count
+    else
+      0.0
+    end
   end
 
   scope :search, -> (search_params) do

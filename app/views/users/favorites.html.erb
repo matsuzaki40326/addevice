@@ -1,19 +1,38 @@
-<div class="container mx-auto mt-5 mb-5">
-  <div class="flex w-full flex-wrap gap-6 ml-10">
-    <% @favorite_items.each do |item| %>
-      <div class="bg-twibg shadow-lg rounded-md">
-        <%= link_to item_path(item) do %>
-          <%= image_tag item.image.variant(resize: "200x200^", gravity: "center", crop: "200x200+0+0").processed, class: 'hover:opacity-75' %>
-        <% end %>
-        <div class="py-4 text-sm text-center mt-2 relative">
-          <span class="text-gray-300"><%= item.name %></span>
-          <% if current_user == @user %>
-            <span class="absolute top-1 right-2" id="b_btn<%= item.id %>">
-              <%= render 'b_btn',item: item %>
-            </span>
+<div class="container mx-auto sm:mt-5 sm:mb-5">
+  <div class="favorite-list favorite_scroll my-10">
+    <div class="flex flex-wrap w-full gap-10">
+      <% @favorite_items.each do |item| %>
+        <div class="bg-twibg shadow-lg rounded-md w-1/6">
+          <%= link_to item_path(item), data: {"turbolinks" => false} do %>
+            <%= image_tag item.image.variant(resize: "600x600^", gravity: "center", crop: "600x600+0+0").processed, class: 'hover:opacity-75 rounded' %>
           <% end %>
+          <div class="py-4 text-sm text-center mt-2 relative">
+            <%= link_to item_path(item), data: {"turbolinks" => false} do %>
+             <span class="font-bold text-gray-300 hover:opacity-75"><%= item.name %></span>
+            <% end %>
+            <% if current_user == @user %>
+              <span class="absolute top-1 right-2" id="b_btn<%= item.id %>">
+                <%= render 'b_btn',item: item %>
+              </span>
+            <% end %>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
+    <div class="hidden"><%= paginate @favorite_items %></div>
   </div>
 </div>
+
+<script>
+  $(window).on('scroll', function() {
+    scrollHeight = $(document).height();
+    scrollPosition = $(window).height() + $(window).scrollTop();
+    if ( (scrollHeight - scrollPosition) / scrollHeight <= 0.05) {
+      $('.favorite_scroll').jscroll({
+        loadingHtml: '<div class="flex items-center justify-center pt-5"><svg width="24px" height="24px" class="animate-spin viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd" d="M12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="pink"/><path d="M2 12C2 6.47715 6.47715 2 12 2V5C8.13401 5 5 8.13401 5 12H2Z" fill="pink"/></svg></div>',
+        contentSelector: '.favorite-list',
+        nextSelector: 'span.next:last a'
+      });
+    }
+  });
+</script>
