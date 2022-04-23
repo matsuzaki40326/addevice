@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :ensure_guest_user, only: [:edit, :withdrawal]
-  before_action :ensure_user, only: [:edit, :update]
+  before_action :ensure_guest_user, only: [:edit, :withdrawal, :favorites]
+  before_action :ensure_user, only: [:edit, :update, :favorites]
+  before_action :only_admin, only: [:index, :search]
   def index
     @users = User.page(params[:page]).per(20)
   end
@@ -30,6 +31,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     favorites = Favorite.where(user_id: @user.id).pluck(:item_id)
     @favorite_items = Item.find(favorites)
+    @favorite_items = Kaminari.paginate_array(@favorite_items).page(params[:page]).per(15)
   end
 
   def withdrawal
@@ -54,7 +56,7 @@ class UsersController < ApplicationController
   def ensure_guest_user
     @user = User.find(params[:id])
     if @user.name == "ゲスト"
-      redirect_to user_path(current_user), notice: 'ブックマーク機能の使用はユーザー登録が必要です。'
+      redirect_to user_path(current_user), alert: 'ゲストユーザーには使用できない機能です。'
     end
   end
 
@@ -63,5 +65,11 @@ class UsersController < ApplicationController
     unless (@user == current_user) || current_user.admin?
       redirect_to user_path(current_user)
     end
+  end
+
+  def only_admin
+    unless current_user.admin
+      redirect_to user_path(current_user)
+     end
   end
 end

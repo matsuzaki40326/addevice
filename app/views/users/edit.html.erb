@@ -2,7 +2,7 @@
   <div class="text-center text-gray-400 h-1/2">
     <%= form_with model: @user, local: true do |f| %>
       <%= f.label :name %>
-      <%= f.text_field :name, class: 'p-2 bg-gray-700 text-gray-400 text-sm focus:ring-4 focus:ring-purple-400 duration-300 rounded-md mb-5' %><br>
+      <%= f.text_field :name, class: 'p-2 bg-gray-700 text-gray-200 text-sm focus:ring-4 focus:ring-purple-400 duration-300 rounded-md mb-5' %><br>
       <%= f.label :profileimage %><br>
       <div class="h-full"><%= image_tag @user.profile_image.variant(resize: "400x400^",gravity: "center", crop: "400x400+0+0").processed, class: 'rounded-full bg-white mx-auto my-5' %></div>
       <div class="mt-10 mb-5"><%= f.file_field :profile_image, accept: "image/*" %></div>

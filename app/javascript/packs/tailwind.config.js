@@ -21,8 +21,11 @@ module.exports = {
         teal300: '#81e6d9',
         teal400: '#4fd1c5',
         orange500: '#ed8936',
-        ratyyellow: '#ffb251'
-      }
+        ratyyellow: '#ffb251',
+        cream1: '#fbf8ef',
+        cream2: '#f7f1e0',
+        cream3: '#f8f4e6'
+      },
     },
   },
   variants: {

@@ -1,7 +1,7 @@
 <div class="border-t border-gray-600 px-5 pt-3 bg-twibg" id="review_form">
-  <%= form_with model: [item,review], local: false do |f| %>
-    <div class="text-center p-3"><%= f.text_area :comment, placeholder: "レビュー", class: 'w-full lg:h-20 p-2 bg-gray-700 text-gray-400 text-sm focus:ring-4 focus:ring-purple-400 duration-300 rounded-md placeholder-gray-400 placeholder-opacity-50' %></div>
-    <div id="star1" class="flex justify-center mt-3">
+  <%= form_with model: [item,review], local: true do |f| %>
+    <div class="text-center p-3"><%= f.text_area :comment, placeholder: "レビュー", class: 'w-2/3 lg:h-28 p-2 bg-gray-700 text-gray-200 text-sm focus:ring-4 focus:ring-purple-400 duration-300 rounded-md placeholder-gray-400 placeholder-opacity-50' %></div>
+    <div id="star1" class="flex justify-center lg:mt-3">
       <%= f.label :rate,'評価 '%>
     </div>
     <script>
@@ -17,7 +17,7 @@
     </script>
     <div class="text-center mt-5 w-full">
       <%= button_tag(type: "submit", class: 'w-2/3') do %>
-        <div class="<%= btn %>"><i class="fa-solid fa-paper-plane"></i></div>
+        <div class="<%= btn %> lg:mt-3"><i class="fas fa-paper-plane"></i></div>
       <% end %>
     </div>
   <% end %>
