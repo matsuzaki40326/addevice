@@ -19,8 +19,9 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.page(params[:page]).per(5)
-
+    @categories = Category.all
+    @makers = Maker.all
+    @items = Item.page(params[:page]).per(12)
   end
 
   def show
@@ -84,6 +85,10 @@ class ItemsController < ApplicationController
     unless current_user.admin
       redirect_to user_path(current_user)
     end
+  end
+
+  def item_search_params
+    params.fetch(:search, {}).permit(:category_id, :maker_id, category_ids: [], maker_ids: [])
   end
 
 end

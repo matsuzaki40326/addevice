@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit, :withdrawal, :favorites]
   before_action :ensure_user, only: [:edit, :update, :favorites]
+  before_action :only_admin, only: [:index, :search]
   def index
     @users = User.page(params[:page]).per(20)
   end
@@ -64,5 +65,11 @@ class UsersController < ApplicationController
     unless (@user == current_user) || current_user.admin?
       redirect_to user_path(current_user)
     end
+  end
+
+  def only_admin
+    unless current_user.admin
+      redirect_to user_path(current_user)
+     end
   end
 end

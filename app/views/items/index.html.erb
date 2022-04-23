@@ -1,16 +1,58 @@
-<div class="container mx-auto mt-5 mb-5">
-  <div class="text-center"><%= render 'form_search' %></div>
-  <div class="flex flex-wrap gap-10 ml-10">
-    <% @items.each do |item| %>
-      <div class="shadow-lg rounded-md bg-twibg mt-5 transform hover:scale-110 hover:opacity-75 duration-500 w-1/6 h-1/6">
-        <%= link_to item_path(item), data: {"turbolinks" => false} do %>
-          <%= image_tag item.image.variant(resize: "600x600^", gravity: "center", crop: "600x600+0+0").processed, class: 'rounded' %>
-          <div class="py-4 text-sm text-center mt-2">
-            <span class="text-gray-300 font-bold"><%= item.name %></span>
-          </div>
+<div class="container mx-auto my-5">
+  <div class="flex w-full">
+    <div class="w-1/4 mt-20">
+      <p class="text-lg font-bold text-gray-300 mt-16">カテゴリー</p>
+      <div>
+        <%= form_with scope: :search, url: filter_path, method: :get, local: true do |f| %>
+          <% @categories.each do |category| %>
+            <div>
+              <%= f.check_box :category_ids,{ multiple: true, include_hidden: false },category.id %>
+              <%= f.label category.name, class: 'text-pink-200 text-sm', for: "search_category_ids_#{category.id}" %>
+            </div>
+          <% end %>
+          <p class="text-lg font-bold text-gray-300 mt-3">メーカー</p>
+          <% @makers.each do |maker| %>
+            <div>
+              <%= f.check_box :maker_ids,{ multiple: true, include_hidden: false }, maker.id %>
+              <%= f.label maker.name, class: 'text-pink-200 text-sm', for: "search_maker_ids_#{maker.id}" %>
+            </div>
+          <% end %>
+          <%= button_tag(type: "submit", class: 'mt-5') do %>
+            <div class="<%= btn %>">検索</div>
+          <% end %>
         <% end %>
       </div>
-    <% end %>
+    </div>
+    <div class="w-3/4">
+      <div class="mt-10">
+        <div class="flex flex-wrap gap-10 w-full">
+          <% @items.each do |item| %>
+            <div class="shadow-lg rounded-md bg-twibg mt-5 transform hover:scale-110 hover:opacity-75 duration-500 md:w-52 h-auto sm:w-24">
+              <%= link_to item_path(item), data: {"turbolinks" => false} do %>
+                <%= image_tag item.image.variant(resize: "600x600^", gravity: "center", crop: "600x600+0+0").processed, class: 'rounded' %>
+                <div class="py-4 text-sm text-center mt-2">
+                  <span class="text-gray-300 font-black"><%= item.name %></span>
+                  <div class="py-3 flex justify-center item_average<%= item.id %>"></div>
+                  <script>
+                  $('.item_average<%= item.id %>').empty();
+                  $('.item_average<%= item.id %>').raty({
+                    size      : 36,
+                    starOff   : '<%= asset_path('star-off.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    starOn    : '<%= asset_path('star-on.png') %>',
+                    half      : false,
+                    readOnly: true,
+                    score: <%= item.review_rate_average %>,
+                  });
+                  </script>
+                  <span class="text-gray-300"><i class="far fa-comment"></i> <%= item.review_amount %></span>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <div class="pt-14 pb-9"><%= paginate @items %></div>
+      </div>
+    </div>
   </div>
-  <%= paginate @items %>
 </div>
