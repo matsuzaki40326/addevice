@@ -11,11 +11,8 @@ import "jquery";
 import '../../assets/stylesheets/application.scss'
 import '@fortawesome/fontawesome-free/js/all'
 import 'packs/raty'
+import 'stylesheets/application.scss'
 window.$ = window.jQuery = require('jquery');
-
-
-// import 'slick.min.js'
-// import './slick'
 
 
 

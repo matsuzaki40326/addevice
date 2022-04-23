@@ -1,14 +1,13 @@
-console.log($('#reviews_ajax'));
-$('.reviews_ajax').html("<%= j(render '/items/reviews', reviews: @reviews) %>");
-$('textarea').val('');
-$('#average').html("<%= j(render '/items/average', average: @average, review_count: @review_count) %>");
-$('#flash').html("<%= j(render '/layouts/flash') %>");
-$('#star1').empty();
-$('#star1').raty({
-  size     : 36,
-  starOff:  '<%= asset_path('star-off.png') %>',
-  starOn: '<%= asset_path('star-on.png') %>',
-  starHalf: '<%= asset_path('star-half.png') %>',
-  scoreName: 'review[rate]',
-  half: false,
-});
+<!--$('.reviews_ajax').html("<%#= j(render '/items/reviews', reviews: @reviews) %>");-->
+<!--$('textarea').val('');-->
+<!--$('#average').html("<%#= j(render '/items/average', average: @average, review_count: @review_count) %>");-->
+<!--$('#flash').html("<%#= j(render '/layouts/flash') %>");-->
+<!--$('#star1').empty();-->
+<!--$('#star1').raty({-->
+<!--  size     : 36,-->
+<!--  starOff:  '<%#= asset_path('star-off.png') %>',-->
+<!--  starOn: '<%#= asset_path('star-on.png') %>',-->
+<!--  starHalf: '<%#= asset_path('star-half.png') %>',-->
+<!--  scoreName: 'review[rate]',-->
+<!--  half: false,-->
+<!--});-->

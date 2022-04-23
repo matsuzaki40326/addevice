@@ -10,8 +10,8 @@
       <span class="flex pl-5 star2<%= review.id %>"></span>
     </div>
     <p class="mt-3 ml-2 text-gray-400 px-3"><%= review.rate %></p>
-    <p class="w-96 text-sm text-gray-400 line-clamp-4 mx-auto mt-3 hover:opacity-75">
-       <a class="js-modal-open px-3" data-target="#modal_<%= review.id %>" href=""><%= review.comment %></a>
+    <p class="w-96 text-sm text-gray-400 line-clamp-4 mx-auto mt-3">
+       <a class="js-modal-open px-3 hover:opacity-75" data-target="#modal_<%= review.id %>" href=""><%= review.comment %></a>
     </p>
     <div class="h-full w-20 text-right flex flex-col">
       <% if current_user.admin || current_user == review.user %>
