@@ -6,14 +6,14 @@
         <%= form_with scope: :search, url: filter_path, method: :get, local: true do |f| %>
           <% @categories.each do |category| %>
             <div>
-              <%= f.check_box :category_ids,{ multiple: true, include_hidden: false },category.id %>
+              <%= f.check_box :category_ids,{ multiple: true, include_hidden: false },category.id, nil %>
               <%= f.label category.name, class: 'text-pink-200 text-sm', for: "search_category_ids_#{category.id}" %>
             </div>
           <% end %>
           <p class="text-lg font-bold text-gray-300 mt-3">メーカー</p>
           <% @makers.each do |maker| %>
             <div>
-              <%= f.check_box :maker_ids,{ multiple: true, include_hidden: false }, maker.id %>
+              <%= f.check_box :maker_ids,{ multiple: true, include_hidden: false }, maker.id, nil %>
               <%= f.label maker.name, class: 'text-pink-200 text-sm', for: "search_maker_ids_#{maker.id}" %>
             </div>
           <% end %>

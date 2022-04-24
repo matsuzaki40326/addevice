@@ -5,18 +5,26 @@
       <%= form_with scope: :search, url: filter_path, method: :get, local: true do |f| %>
         <% categories.each do |category| %>
           <div>
-            <%= f.check_box :category_ids,{ multiple: true, include_hidden: false },category.id %>
-            <%= f.label category.name, class: 'text-pink-200 text-sm', for: "search_category_ids_#{category.id}" %>
+            <% if params.dig(:search,:category_ids).nil? %>
+              <%= f.check_box :category_ids,{ multiple: true },category.id, nil %>
+            <% else %>
+              <%= f.check_box :category_ids,{ multiple: true, checked: params[:search][:category_ids].include?(category.id.to_s) },category.id, nil %>
+            <% end %>
+              <%= f.label category.name, class: 'text-pink-200 text-sm', for: "search_category_ids_#{category.id}" %>
           </div>
-        <% end %>
+          <% end %>
         <p class="text-lg font-bold text-gray-300 mt-3">メーカー</p>
         <% makers.each do |maker| %>
           <div>
-            <%= f.check_box :maker_ids,{ multiple: true, include_hidden: false }, maker.id %>
-            <%= f.label maker.name, class: 'text-pink-200 text-sm', for: "search_maker_ids_#{maker.id}" %>
+            <% if params.dig(:search,:maker_ids).nil? %>
+              <%= f.check_box :maker_ids,{ multiple: true }, maker.id, nil %>
+            <% else %>
+              <%= f.check_box :maker_ids,{ multiple: true, checked: params[:search][:maker_ids].include?(maker.id.to_s) }, maker.id, nil %>
+            <% end %>
+              <%= f.label maker.name, class: 'text-pink-200 text-sm', for: "search_maker_ids_#{maker.id}" %>
           </div>
         <% end %>
-        <%= select_tag :sort, options_for_select({高評価順: "1", レビュー数が多い順: "2"}),include_blank: "並び順", class: 'mt-10 bg-twibg border border-gray-600 text-gray-300 text-sm rounded focus:ring-purple-400 focus:ring-2 p-2' %> <br>
+        <%= select_tag :sort, options_for_select({高評価順: "1", レビュー数が多い順: "2"}, params[:sort]),include_blank: "並び順", class: 'mt-10 bg-twibg border border-gray-600 text-gray-300 text-sm rounded focus:ring-purple-400 focus:ring-2 p-2' %> <br>
         <%= button_tag(type: "submit", class: 'mt-5') do %>
           <div class="<%= btn %>">検索</div>
         <% end %>
