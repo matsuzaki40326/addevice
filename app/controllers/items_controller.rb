@@ -33,27 +33,22 @@ class ItemsController < ApplicationController
     if params[:rate] == "1"
       item_reviews = Review.where(item_id: @item.id, rate: 1)
       @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(10)
-      gon.reviews = item_reviews
     elsif params[:rate] == "2"
       item_reviews = Review.where(item_id: @item.id, rate: 2)
       @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(10)
-      gon.reviews = item_reviews
     elsif params[:rate] == "3"
       item_reviews = Review.where(item_id: @item.id, rate: 3)
       @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(10)
-      gon.reviews = item_reviews
     elsif params[:rate] == "4"
       item_reviews = Review.where(item_id: @item.id, rate: 4)
       @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(10)
-      gon.reviews = item_reviews
     elsif params[:rate] == "5"
       item_reviews = Review.where(item_id: @item.id, rate: 5)
       @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(10)
-      gon.reviews = item_reviews
     else
       @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(10)
-      gon.reviews = item_reviews
     end
+    gon.reviews = item_reviews.map
   end
 
   def edit
