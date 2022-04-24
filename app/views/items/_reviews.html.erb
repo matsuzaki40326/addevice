@@ -46,7 +46,11 @@
      });
     });
   </script>
-  <script>
+  
+  <div class="w-full"><%= render '/items/modal', review: review %></div>
+<% end %>
+
+<script>
     let count = 0;
     $(window).on('scroll', function() {
       scrollHeight = $(document).height();
@@ -90,5 +94,3 @@
       }
     });
   </script>
-  <div class="w-full"><%= render '/items/modal', review: review %></div>
-<% end %>

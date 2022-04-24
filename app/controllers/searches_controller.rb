@@ -4,22 +4,27 @@ class SearchesController < ApplicationController
     @categories = Category.all
     @makers = Maker.all
     @search_params = item_search_params
-    items = Item.search(@search_params)
+    search_items = Item.search(@search_params)
       if params[:sort] == "1"
-        @items = items.each do |item|
+        items = search_items.each do |item|
           item.average = item.review_rate_average
         end
-        @items = @items.sort_by { |item| item.average }.reverse
-        @items = Kaminari.paginate_array(@items).page(params[:page]).per(12)
+        sort_items = items.sort_by { |item| item.average }.reverse
+        @items = Kaminari.paginate_array(sort_items).page(params[:page]).per(12)
+        search_items = sort_items
       elsif params[:sort] == "2"
-        @items = items.each do |item|
+        items = search_items.each do |item|
           item.amount = item.review_amount
         end
-        @items = @items.sort_by { |item| item.amount }.reverse
-        @items = Kaminari.paginate_array(@items).page(params[:page]).per(12)
+        sort_items = items.sort_by { |item| item.amount }.reverse
+        @items = Kaminari.paginate_array(sort_items).page(params[:page]).per(12)
+        search_items = sort_items
       else
         @items = Item.search(@search_params).page(params[:page]).per(12)
       end
+
+    # Active record ではなく素のオブジェクトに戻す
+    gon.items = search_items.to_a.map {|item| item.attributes.merge(avg: item.review_rate_average)}
   end
 
 
