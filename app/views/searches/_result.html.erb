@@ -33,7 +33,7 @@
   </div>
   <div class="w-3/4">
     <p class="text-purple-300 font-black text-center w-full mt-10">Result</p>
-    <div class="mt-10">
+    <div class="mt-10 result_scroll result_list">
       <div class="flex flex-wrap gap-10 w-full">
         <% items.each do |item| %>
           <div class="shadow-lg rounded-md bg-twibg mt-5 transform hover:scale-110 hover:opacity-75 duration-500 lg:w-52">
@@ -60,7 +60,43 @@
           </div>
         <% end %>
       </div>
-      <div class="pt-14 pb-9"><%= paginate items %></div>
+      <div class="hidden"><%= paginate items %></div>
     </div>
   </div>
 </div>
+
+<script>
+  let count = 0;
+    $(window).on('scroll', function() {
+      scrollHeight = $(document).height();
+      scrollPosition = $(window).height() + $(window).scrollTop();
+      if ( (scrollHeight - scrollPosition) / scrollHeight <= 0.05) {
+        $('.result_scroll').jscroll({
+          loadingHtml: '<div class="flex items-center justify-center pt-6"><svg width="24px" height="24px" class="animate-spin viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd" d="M12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="pink"/><path d="M2 12C2 6.47715 6.47715 2 12 2V5C8.13401 5 5 8.13401 5 12H2Z" fill="pink"/></svg></div>',
+          contentSelector: '.result_list',
+          nextSelector: 'span.next:last a',
+          callback: function(){
+            count = count + 1;
+            const range = (start, end) => [...Array(end + 1).keys()].slice(start);
+            var min =  Number(count + "2");
+            var max = min + 11
+
+            $.each(range(min, max),function(index,num){
+
+              let str = ".item_average" + gon.items[num].id
+
+              $(str).raty({
+                size      : 36,
+                starOff   : '<%= asset_path('star-off.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                starOn    : '<%= asset_path('star-on.png') %>',
+                half      : false,
+                readOnly: true,
+                score: gon.items[num].avg,
+              });
+            });
+          }
+        });
+      }
+    });
+</script>
