@@ -19,9 +19,7 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @categories = Category.all
-    @makers = Maker.all
-    @items = Item.page(params[:page]).per(12)
+    @items = Item.order("RANDOM()").limit(8)
   end
 
   def show
@@ -48,7 +46,7 @@ class ItemsController < ApplicationController
     else
       @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(10)
     end
-    gon.reviews = item_reviews.map
+    gon.reviews = item_reviews
   end
 
   def edit

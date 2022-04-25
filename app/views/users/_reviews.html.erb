@@ -1,38 +1,36 @@
-<% reviews.each do |review| %>
-  <div class="flex shadow-lg mb-3 rounded-md border-gray-800 border w-2/3 h-32 mx-auto">
-    <div class="h-full my-auto">
-      <%= link_to item_path(review.item.id), data: {"turbolinks" => false} do %>
-        <%= image_tag review.item.image.variant(resize: "600x600^", gravity: "center", crop: "600x600+0+0").processed, class: 'hover:opacity-75 h-full rounded' %>
-      <% end %>
-    </div>
-    <div class="mt-3 ml-auto">
-      <p class="font-bold mt-1 whitespace-nowrap text-center text-sm text-gray-300"><%= review.item.name %></p>
-      <span class="flex mt-3" id="star2<%= review.id %>"></span>
-      <p class="mb-2 text-gray-400 text-center mt-3"><%= review.rate %></p>
-    </div>
-    <p class="lg:w-96 text-gray-400 text-sm line-clamp-4 mx-auto my-auto h-2/3">
-      <a class="js-modal-open break-words hover:opacity-75" data-target="#modal_<%= review.id %>" href=""><%= review.comment %></a>
-    </p>
-    <% if current_user.admin || current_user == review.user %>
-      <span class="p-3">
-        <%= link_to edit_item_review_path(review.item.id, review), class: 'text-gray-400' do %>
-          <i class="fas fa-edit hover:opacity-75"></i>
+<div class="w-full flex flex-wrap mx-auto gap-3">
+  <% reviews.each do |review| %>
+    <div class="mx-auto">
+      <div class="text-center bg-twibg rounded-md pb-1 xs:w-40 md:w-60 lg:w-72">
+        <%= link_to item_path(review.item.id), data: {"turbolinks" => false} do %>
+          <%= image_tag review.item.image.variant(resize: "600x600^", gravity: "center", crop: "600x600+0+0").processed, class: 'xs:w-40 md:w-60 lg:w-72 xs:mx-auto rounded-md' %>
         <% end %>
-      </span>
-    <% end %>
-  </div>
+        <p class="font-bold whitespace-nowrap text-center pt-3 text-gray-300"><%= review.item.name %></p>
+        <p class="flex mt-3 justify-center" id="star2<%= review.id %>"></p>
+        <p class="mb-2 text-gray-400 text-center mt-3"><%= review.rate %></p>
+        <p class="xs:text-xs md:text-base text-gray-400 mx-auto lg:w-72 px-5 mb-3 line-clamp-3">
+          <a class="js-modal-open break-words hover:opacity-75" data-target="#modal_<%= review.id %>" href=""><%= review.comment %></a>
+        </p>
 
-  <script>
-  $('#star2<%= review.id %>').empty();
-  $('#star2<%= review.id %>').raty({
-    size      : 36,
-    starOff   : '<%= asset_path('star-off.png') %>',
-    starHalf: '<%= asset_path('star-half.png') %>',
-    starOn    : '<%= asset_path('star-on.png') %>',
-    half      : false,
-    readOnly: true,
-    score: <%= review.rate %>,
-  });
+        <script>
+          $('#star2<%= review.id %>').empty();
+          $('#star2<%= review.id %>').raty({
+            size      : 36,
+            starOff   : '<%= asset_path('star-off.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            starOn    : '<%= asset_path('star-on.png') %>',
+            half      : false,
+            readOnly: true,
+            score: <%= review.rate %>,
+            });
+        </script>
+      </div>
+    </div>
+    <%= render '/users/modal', review: review %>
+  <% end %>
+</div>
+
+<script>
   $(function(){
    $('.js-modal-open').on('click',function(){
      $($(this).data('target')).fadeIn();
@@ -43,6 +41,4 @@
      return false;
    });
   });
-  </script>
-  <%= render '/users/modal', review: review %>
-<% end %>
+</script>
