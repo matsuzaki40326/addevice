@@ -19,7 +19,11 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.order("RANDOM()").limit(8)
+    if Rails.env.development? || Rails.env.test? 
+      @items = Item.order("RANDOM()").limit(8)
+    else
+      @items = Item.order("RAND()").limit(8)
+    end
   end
 
   def show
