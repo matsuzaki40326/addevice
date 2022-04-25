@@ -1,58 +1,41 @@
-<div class="container mx-auto my-5">
-  <div class="flex w-full">
-    <div class="w-1/4 mt-20">
-      <p class="text-lg font-bold text-gray-300 mt-16">カテゴリー</p>
-      <div>
-        <%= form_with scope: :search, url: filter_path, method: :get, local: true do |f| %>
-          <% @categories.each do |category| %>
-            <div>
-              <%= f.check_box :category_ids,{ multiple: true, include_hidden: false },category.id, nil %>
-              <%= f.label category.name, class: 'text-pink-200 text-sm', for: "search_category_ids_#{category.id}" %>
-            </div>
-          <% end %>
-          <p class="text-lg font-bold text-gray-300 mt-3">メーカー</p>
-          <% @makers.each do |maker| %>
-            <div>
-              <%= f.check_box :maker_ids,{ multiple: true, include_hidden: false }, maker.id, nil %>
-              <%= f.label maker.name, class: 'text-pink-200 text-sm', for: "search_maker_ids_#{maker.id}" %>
-            </div>
-          <% end %>
-          <%= button_tag(type: "submit", class: 'mt-5') do %>
-            <div class="<%= btn %>">検索</div>
-          <% end %>
-        <% end %>
+<div id="cga" class="relative overflow-hidden bg-no-repeat bg-cover h-screen">
+  <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed"style="background-color: rgba(0, 0, 0, 0.75)">
+    <div class="flex justify-center h-full">
+      <div class="text-center text-white px-6 md:px-12">
+        <h1 class="text-5xl font-black mt-52 mt-0 mb-8">addevice</h1>
+        <h3 class="text-xl font-bold">device + advice</h3>
       </div>
     </div>
-    <div class="w-3/4">
-      <div class="mt-10">
-        <div class="flex flex-wrap gap-10 w-full">
-          <% @items.each do |item| %>
-            <div class="shadow-lg rounded-md bg-twibg mt-5 transform hover:scale-110 hover:opacity-75 duration-500 md:w-52 h-auto sm:w-24">
-              <%= link_to item_path(item), data: {"turbolinks" => false} do %>
-                <%= image_tag item.image.variant(resize: "600x600^", gravity: "center", crop: "600x600+0+0").processed, class: 'rounded' %>
-                <div class="py-4 text-sm text-center mt-2">
-                  <span class="text-gray-300 font-black"><%= item.name %></span>
-                  <div class="py-3 flex justify-center item_average<%= item.id %>"></div>
-                  <script>
-                  $('.item_average<%= item.id %>').empty();
-                  $('.item_average<%= item.id %>').raty({
-                    size      : 36,
-                    starOff   : '<%= asset_path('star-off.png') %>',
-                    starHalf: '<%= asset_path('star-half.png') %>',
-                    starOn    : '<%= asset_path('star-on.png') %>',
-                    half      : false,
-                    readOnly: true,
-                    score: <%= item.review_rate_average %>,
-                  });
-                  </script>
-                  <span class="text-gray-300"><i class="far fa-comment"></i> <%= item.review_amount %></span>
-                </div>
-              <% end %>
-            </div>
+</div>
+
+<div class="flex absolute bottom-20 overflow-hidden">
+  <div class="slidebox flex items-center overflow-hidden slidestop" style="height: 400px;">
+    <ul class="slideshow">
+      <% @items.each do |item| %>
+        <div class="p-0.5 bg-gradient-to-tr from-purple-800 to-pink-800 rounded-lg transform hover:scale-110 hover:-translate-y-5 duration-500" id="marginclass">
+          <%= link_to item_path(item) do %>
+            <li class="content"><%= image_tag item.image.variant(resize: "700x700^", gravity: "center", crop: "700x700+0+0").processed, class: 'rounded-lg border border-gray-600 shadow-md hover:opacity-75' %></li>
           <% end %>
         </div>
-        <div class="pt-14 pb-9"><%= paginate @items %></div>
-      </div>
-    </div>
+      <% end %>
+    </ul>
+    <ul class="slideshow">
+      <% @items.each do |item| %>
+        <div class="p-0.5 bg-gradient-to-tr from-purple-800 to-pink-800 rounded-lg transform hover:scale-110 hover:-translate-y-5 duration-500" id="marginclass">
+          <%= link_to item_path(item) do %>
+            <li class="content"><%= image_tag item.image.variant(resize: "700x700^", gravity: "center", crop: "700x700+0+0").processed, class: 'rounded-lg border border-gray-600 shadow-md hover:opacity-75' %></li>
+          <% end %>
+        </div>
+      <% end %>
+    </ul>
+    <ul class="slideshow">
+      <% @items.each do |item| %>
+        <div class="p-0.5 bg-gradient-to-tr from-purple-800 to-pink-800 rounded-lg transform hover:scale-110 hover:-translate-y-5 duration-500" id="marginclass">
+          <%= link_to item_path(item) do %>
+            <li class="content"><%= image_tag item.image.variant(resize: "700x700^", gravity: "center", crop: "700x700+0+0").processed, class: 'rounded-lg border border-gray-600 shadow-md hover:opacity-75' %></li>
+          <% end %>
+        </div>
+      <% end %>
+    </ul>
   </div>
 </div>

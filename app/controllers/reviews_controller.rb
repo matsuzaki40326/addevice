@@ -12,7 +12,7 @@ class ReviewsController < ApplicationController
        @reviews = Review.where(item_id: @item.id)
        @average = @reviews.average(:rate)
        @reviews = Kaminari.paginate_array(@reviews).page(params[:page]).per(10)
-       flash.now[:notice] = "レビューを投稿しました。"
+       flash[:notice] = "レビューを投稿しました。"
        redirect_to request.referer
       else
         redirect_to request.referer, alert: "レビューの投稿は1度までです。"
