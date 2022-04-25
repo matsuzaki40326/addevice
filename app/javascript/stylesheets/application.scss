@@ -1,0 +1,36 @@
+#cga{
+  background-image: url(../../assets/images/cga.jpg);
+  height: 100vh;
+}
+
+.slidebox {
+　height: 340px;
+}
+.slideshow {
+  display: flex;
+}
+.content {
+  width: 280px;
+  height: 280px;
+}
+
+#marginclass {
+  margin-right: 2.5rem;
+}
+
+.slideshow {
+  display: flex;
+  animation: loop-slide 55s infinite linear 1s both;
+}
+@keyframes loop-slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.slidestop:hover .slideshow {
+  animation-play-state: paused;
+}

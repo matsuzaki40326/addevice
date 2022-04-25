@@ -1,24 +1,26 @@
-<div class="mt-10 mb-10">
-  <div class="w-1/3 h-1/3 mx-auto my-5">
-    <%= image_tag @user.get_profile_image(600,600), class: 'rounded-full w-1/2 mx-auto bg-white' %>
-      <p class="text-center text-pink-200 mt-3 font-medium"><%= @user.name %></p>
-      <div class="text-center">
-        <% if (current_user == @user || current_user.admin?) && current_user.name != "ゲスト" %>
-          <div class="my-5">
-            <%= link_to edit_user_path(@user), class: 'p-3 px-4 bg-transparent rounded-3xl text-gray-400 hover:bg-twibg' do %>
-              <i class="far fa-address-card"></i> プロフィール編集
-            <% end %>
-          </div>
-          <div class="mt-5">
-            <%= link_to favorites_user_path(@user), class: 'p-3 px-4 bg-transparent rounded-3xl text-gray-400 hover:bg-twibg' do %>
-              <i class="far fa-bookmark"></i> ブックマーク
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+<div class="container mx-auto">
+  <div class="mt-10 mb-10">
+    <div class="lg:w-1/3 mx-auto my-5">
+      <%= image_tag @user.get_profile_image(600,600), class: 'rounded-full xs:w-40 sm:w-1/4 lg:w-1/2 mx-auto bg-white' %>
+        <p class="text-center text-pink-200 mt-3 text-lg font-bold"><%= @user.name %></p>
+        <div class="text-center">
+          <% if (current_user == @user || current_user.admin?) && current_user.name != "ゲスト" %>
+            <div class="my-5">
+              <%= link_to edit_user_path(@user), class: 'p-3 px-4 bg-transparent rounded-3xl text-gray-400 hover:bg-twibg xs:text-xs md:text-base' do %>
+                <i class="far fa-address-card"></i> プロフィール編集
+              <% end %>
+            </div>
+            <div class="mt-5">
+              <%= link_to favorites_user_path(@user), class: 'p-3 px-4 bg-transparent rounded-3xl text-gray-400 hover:bg-twibg xs:text-xs md:text-base' do %>
+                <i class="far fa-bookmark"></i> ブックマーク
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+    </div>
   </div>
-  <div class="">
-    <%= render '/users/reviews', reviews: @reviews %>
-    <div class="pt-10 mt-10 mx-auto text-lg"><%= paginate @reviews %></div>
-  </div>
+</div>
+<div class="">
+  <%= render '/users/reviews', reviews: @reviews %>
+  <div class="py-10 text-lg"><%= paginate @reviews %></div>
 </div>

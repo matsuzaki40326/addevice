@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     reviews = Review.where(user_id: @user)
-    @reviews = Kaminari.paginate_array(reviews).page(params[:page]).per(7)
+    @reviews = Kaminari.paginate_array(reviews).page(params[:page]).per(10)
   end
 
   def edit
@@ -70,6 +70,6 @@ class UsersController < ApplicationController
   def only_admin
     unless current_user.admin
       redirect_to user_path(current_user)
-     end
+    end
   end
 end
