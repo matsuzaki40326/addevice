@@ -2,16 +2,16 @@
   <div class="favorite-list favorite_scroll my-10">
     <div class="flex flex-wrap w-full gap-10">
       <% @favorite_items.each do |item| %>
-        <div class="bg-twibg shadow-lg rounded-md w-1/6">
+        <div class="bg-twibg shadow-lg rounded-md xs:w-32 lg:w-1/6">
           <%= link_to item_path(item), data: {"turbolinks" => false} do %>
             <%= image_tag item.image.variant(resize: "600x600^", gravity: "center", crop: "600x600+0+0").processed, class: 'hover:opacity-75 rounded' %>
           <% end %>
           <div class="py-4 text-sm text-center mt-2 relative">
             <%= link_to item_path(item), data: {"turbolinks" => false} do %>
-             <span class="font-bold text-gray-300 hover:opacity-75"><%= item.name %></span>
+             <span class="font-bold text-gray-300 hover:opacity-75 xs:text-xs sm:text-base md:px-2 lg:px-0"><%= item.name %></span>
             <% end %>
             <% if current_user == @user %>
-              <span class="absolute top-1 right-2" id="b_btn<%= item.id %>">
+              <span class="absolute top-0 right-1 mb-1" id="b_btn<%= item.id %>">
                 <%= render 'b_btn',item: item %>
               </span>
             <% end %>
