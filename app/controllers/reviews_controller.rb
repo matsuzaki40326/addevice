@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :ensure_guest_user
+  before_action :ensure_user, only: [:edit, :update, :destroy]
   def create
     @item = Item.find(params[:item_id])
     review = current_user.reviews.new(review_params)
@@ -25,7 +26,7 @@ class ReviewsController < ApplicationController
   def destroy
     review = Review.find(params[:id])
     review.destroy
-    redirect_to item_path(review.item)
+    redirect_to item_path(review.item), notice: "レビューを削除しました。"
   end
 
   def edit
@@ -52,6 +53,13 @@ class ReviewsController < ApplicationController
   def ensure_guest_user
     if current_user.name == "ゲスト"
       redirect_to user_path(current_user), alert: 'レビュー機能の使用はユーザー登録が必要です。'
+    end
+  end
+
+  def ensure_user
+    review = Review.find(params[:id])
+    unless (current_user == review.user) || current_user.admin
+      redirect_to current_user
     end
   end
 end

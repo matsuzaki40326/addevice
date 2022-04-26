@@ -23,6 +23,7 @@ class UsersController < ApplicationController
        redirect_to user_path(user)
     else
        user = User.find(params[:id])
+       flash[:alert] = "編集に失敗しました。"
        render 'edit'
     end
   end
