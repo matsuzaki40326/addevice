@@ -11,7 +11,7 @@
               <% else %>
                 <%= f.check_box :category_ids,{ multiple: true, checked: params[:search][:category_ids].include?(category.id.to_s) },category.id, nil %>
               <% end %>
-                <%= f.label category.name, class: 'text-pink-200 text-sm', for: "search_category_ids_#{category.id}" %>
+                <%= f.label category.name, class: 'text-pink-200 xs:text-xs sm:text-sm break-words', for: "search_category_ids_#{category.id}" %>
             </div>
             <% end %>
           <p class="text-lg font-bold text-gray-300 mt-3">メーカー</p>
@@ -22,7 +22,7 @@
               <% else %>
                 <%= f.check_box :maker_ids,{ multiple: true, checked: params[:search][:maker_ids].include?(maker.id.to_s) }, maker.id, nil %>
               <% end %>
-                <%= f.label maker.name, class: 'text-pink-200 text-sm', for: "search_maker_ids_#{maker.id}" %>
+                <%= f.label maker.name, class: 'text-pink-200 xs:text-xs sm:text-sm break-words', for: "search_maker_ids_#{maker.id}" %>
             </div>
           <% end %>
           <%= select_tag :sort, options_for_select({高評価順: "1", レビュー数が多い順: "2"}, params[:sort]),include_blank: "並び順", class: 'mt-10 bg-twibg border border-gray-600 text-gray-300 text-sm rounded focus:ring-purple-400 focus:ring-2 p-2 xs:w-full lg:w-auto truncate' %> <br>
