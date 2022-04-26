@@ -19,10 +19,10 @@ class ItemsController < ApplicationController
   end
 
   def index
-    if Rails.env.development? || Rails.env.test? 
-      @items = Item.order("RANDOM()").limit(8)
+    if Rails.env.development? || Rails.env.test?
+      @items = Item.order("RANDOM()").limit(12)
     else
-      @items = Item.order("RAND()").limit(8)
+      @items = Item.order("RAND()").limit(12)
     end
   end
 
@@ -34,23 +34,22 @@ class ItemsController < ApplicationController
     @average = item_reviews.average(:rate)
     if params[:rate] == "1"
       item_reviews = Review.where(item_id: @item.id, rate: 1)
-      @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(10)
+      @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(20)
     elsif params[:rate] == "2"
       item_reviews = Review.where(item_id: @item.id, rate: 2)
-      @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(10)
+      @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(20)
     elsif params[:rate] == "3"
       item_reviews = Review.where(item_id: @item.id, rate: 3)
-      @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(10)
+      @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(20)
     elsif params[:rate] == "4"
       item_reviews = Review.where(item_id: @item.id, rate: 4)
-      @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(10)
+      @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(20)
     elsif params[:rate] == "5"
       item_reviews = Review.where(item_id: @item.id, rate: 5)
-      @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(10)
+      @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(20)
     else
-      @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(10)
+      @reviews = Kaminari.paginate_array(item_reviews).page(params[:page]).per(20)
     end
-    gon.reviews = item_reviews
   end
 
   def edit

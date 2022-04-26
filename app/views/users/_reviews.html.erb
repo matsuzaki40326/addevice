@@ -1,17 +1,25 @@
-<div class="w-full flex flex-wrap mx-auto gap-3">
+<div class="w-full flex flex-wrap mx-auto px-10 gap-3">
   <% reviews.each do |review| %>
     <div class="mx-auto">
-      <div class="text-center bg-twibg rounded-md pb-1 xs:w-40 md:w-60 lg:w-72">
-        <%= link_to item_path(review.item.id), data: {"turbolinks" => false} do %>
-          <%= image_tag review.item.image.variant(resize: "600x600^", gravity: "center", crop: "600x600+0+0").processed, class: 'xs:w-40 md:w-60 lg:w-72 xs:mx-auto rounded-md' %>
+      <div class="text-center bg-twibg rounded-md pb-1 xs:w-40 md:w-60">
+        <%= link_to item_path(review.item.id) do %>
+          <%= image_tag review.item.image.variant(resize: "600x600^", gravity: "center", crop: "600x600+0+0").processed, class: 'xs:w-40 md:w-60 xs:mx-auto rounded-md hover:opacity-75' %>
         <% end %>
-        <p class="font-bold whitespace-nowrap text-center pt-3 text-gray-300"><%= review.item.name %></p>
+        <% if current_user.admin || current_user == review.user %>
+          <div class="text-right pr-1 pt-2">
+            <%= link_to edit_item_review_path(review.item.id, review), class: 'text-gray-400' do %>
+              <i class="fas fa-edit hover:opacity-75"></i>
+            <% end %>
+          </div>
+        <% end %>
+          <%= link_to item_path(review.item.id), class: 'font-bold break-words text-center pt-3 text-gray-300 hover:opacity-75' do %>
+            <%= review.item.name %>
+          <% end %>
         <p class="flex mt-3 justify-center" id="star2<%= review.id %>"></p>
         <p class="mb-2 text-gray-400 text-center mt-3"><%= review.rate %></p>
-        <p class="xs:text-xs md:text-base text-gray-400 mx-auto lg:w-72 px-5 mb-3 line-clamp-3">
-          <a class="js-modal-open break-words hover:opacity-75" data-target="#modal_<%= review.id %>" href=""><%= review.comment %></a>
+        <p class="xs:text-xs md:text-base text-gray-400 mx-auto px-5 mb-3 line-clamp-3">
+          <a class="js-modal-open break-words hover:text-gray-200" data-target="#modal_<%= review.id %>" href=""><%= review.comment %></a>
         </p>
-
         <script>
           $('#star2<%= review.id %>').empty();
           $('#star2<%= review.id %>').raty({
