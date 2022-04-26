@@ -15,7 +15,7 @@
   <div>
     <%= render 'form',item: @item, review: @review %>
   </div>
-  <div class="px-10 flex flex-col gap-3 pb-5 pt-3 border-gray-600 bg-twibg rounded-md h-60">
+  <div class="px-10 flex flex-col gap-3 pb-5 pt-3 border-gray-600 border border-twibg rounded-md h-60">
     <p class="text-ratyyellow text-center font-semibold">評価別</p>
     <%= link_to item_path(@item,rate: "1") do %>
       <div class="flex justify-center hover:opacity-75" id="star11"></div>

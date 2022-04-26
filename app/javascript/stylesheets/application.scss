@@ -34,3 +34,13 @@
 .slidestop:hover .slideshow {
   animation-play-state: paused;
 }
+
+.search_condition{
+  overflow: scroll;
+  -ms-overflow-style: none;    /* IE, Edge  */
+  scrollbar-width: none;       /* Firefox  */
+}
+
+.search_condition::-webkit-scrollbar {  /* Chrome, Safari */
+  display:none;
+}
