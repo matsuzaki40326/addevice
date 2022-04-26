@@ -1,6 +1,6 @@
 <div class="container w-full">
   <div class="flex w-full">
-    <div class="xs:w-32 sm:w-1/4 mt-20 fixed">
+    <div class="xs:w-32 sm:w-44 md:w-48 xl:w-52 mt-20 fixed h-2/3 overflow-auto p-5 bg-twibg rounded-md search_condition">
       <p class="text-lg font-bold text-gray-300 whitespace-nowrap">カテゴリー</p>
       <div>
         <%= form_with scope: :search, url: filter_path, method: :get, local: true do |f| %>
@@ -25,7 +25,7 @@
                 <%= f.label maker.name, class: 'text-pink-200 text-sm', for: "search_maker_ids_#{maker.id}" %>
             </div>
           <% end %>
-          <%= select_tag :sort, options_for_select({高評価順: "1", レビュー数が多い順: "2"}, params[:sort]),include_blank: "並び順", class: 'mt-10 bg-twibg border border-gray-600 text-gray-300 text-sm rounded focus:ring-purple-400 focus:ring-2 p-2 xs:w-full md:w-auto truncate' %> <br>
+          <%= select_tag :sort, options_for_select({高評価順: "1", レビュー数が多い順: "2"}, params[:sort]),include_blank: "並び順", class: 'mt-10 bg-twibg border border-gray-600 text-gray-300 text-sm rounded focus:ring-purple-400 focus:ring-2 p-2 xs:w-full lg:w-auto truncate' %> <br>
           <%= button_tag(type: "submit", class: 'mt-5') do %>
             <div class="<%= btn %>">検索</div>
           <% end %>
@@ -37,7 +37,7 @@
       <div class="mt-10 result_scroll result_list">
         <div class="flex flex-wrap w-full justify-around gap-10">
           <% items.each do |item| %>
-            <div class="shadow-lg rounded-md bg-twibg transform hover:scale-110 hover:opacity-75 duration-500 lg:w-60 xs:w-40 xs:ml-3 sm:ml-0">
+            <div class="shadow-lg rounded-md bg-twibg transform hover:scale-110 hover:opacity-75 duration-500 lg:w-48 xl:w-60 xs:w-40 xs:ml-3 sm:ml-0">
               <%= link_to item_path(item), data: {"turbolinks" => false} do %>
                 <%= image_tag item.image.variant(resize: "600x600^", gravity: "center", crop: "600x600+0+0").processed, class: 'rounded' %>
                 <div class="py-4 text-sm text-center mt-2">
