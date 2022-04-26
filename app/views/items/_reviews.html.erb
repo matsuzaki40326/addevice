@@ -1,19 +1,19 @@
 <% reviews.each do |review| %>
-  <div class="flex bg-twibg shadow-md mb-3 rounded-md xs:p-2 sm:p-5 xs:h-44 sm:h-32 md:h-32 xs:w-full lg:w-4/5 xl:w-3/6 mx-auto">
-    <div class="h-full align-center">
+  <div class="sm:flex justify-around bg-twibg shadow-md mb-3 rounded-md xs:p-2 sm:p-5 xs:h-auto sm:h-32 xs:w-11/12 sm:w-4/5 md:w-11/12 lg:w-5/6 xl:w-3/6 mx-auto">
+    <div class="">
       <%= link_to user_path(review.user) do %>
-        <%= image_tag review.user.get_profile_image(700,700), class: 'xs:w-12 md:w-16 rounded-full hover:opacity-75 bg-white' %>
+        <%= image_tag review.user.get_profile_image(700,700), class: 'xs:w-12 md:w-16 rounded-full hover:opacity-75 bg-white xs:mx-auto sm:mx-0' %>
       <% end %>
       <p class="font-bold mt-2 whitespace-nowrap text-center text-gray-400"><%= review.user.name %></p>
     </div>
     <div class="mt-3">
-      <span class="flex pl-5 star2<%= review.id %>"></span>
+      <span class="flex pl-5 justify-center star2<%= review.id %>"></span>
     </div>
-    <p class="text-gray-400 xs:mt-3 sm:mt-2 xs:ml-0 md:ml-2 sm:px-3 xs:mt-10 xl:px-10"><%= review.rate %></p>
-    <p class="xs:w-40 md:w-96 text-sm text-gray-400 line-clamp-4 xs:h-20 my-auto md:my-0">
+    <p class="text-gray-400 sm:mt-2 md:ml-2 sm:px-3 xl:px-10 text-center"><%= review.rate %></p>
+    <p class="xs:w-auto xs:mt-2 sm:mt-0 sm:w-60 md:w-96 text-sm text-gray-400 line-clamp-4 xs:h-20 my-auto md:my-0 text-center">
        <a class="js-modal-open px-3 hover:text-gray-200" data-target="#modal_<%= review.id %>" href=""><%= review.comment %></a>
     </p>
-    <div class="h-full w-20 text-right flex flex-col">
+    <div class="h-full w-auto text-right sm:text-right flex flex-col xs:pr-2 sm:pr-0">
       <% if current_user.admin || current_user == review.user %>
         <%= link_to edit_item_review_path(review.item.id, review), class: 'text-gray-400' do %>
           <i class="fas fa-edit hover:opacity-75"></i>

@@ -1,9 +1,9 @@
 <% if item.favorited_by?(current_user) %>
-  <%= link_to item_favorites_path(item), method: :delete, remote: true, class: 'text-ratyyellow absolute top-2 right-3 text-xl' do %>
+  <%= link_to item_favorites_path(item), method: :delete, remote: true, class: 'text-ratyyellow absolute top-2 right-3 xs:text-sm sm:text-xl' do %>
     <i class="fas fa-bookmark"></i>
   <% end %>
 <% else %>
-  <%= link_to item_favorites_path(item), method: :post, remote: true, class: ' absolute top-2 right-3 text-xl' do %>
+  <%= link_to item_favorites_path(item), method: :post, remote: true, class: ' absolute top-2 right-3 xs:text-sm sm:text-xl' do %>
     <i class="far fa-bookmark text-gray-400 hover:text-ratyyellow"></i>
   <% end %>
 <% end %>
