@@ -1,71 +1,71 @@
-<div class="container w-full">
-  <div class="flex w-full">
-    <div class="xs:w-32 sm:w-44 md:w-48 xl:w-52 mt-20 fixed h-2/3 overflow-auto p-5 bg-twibg rounded-md search_condition">
-      <p class="text-lg font-bold text-gray-300 whitespace-nowrap">カテゴリー</p>
-      <div>
-        <%= form_with scope: :search, url: filter_path, method: :get, local: true do |f| %>
-          <% categories.each do |category| %>
-            <div>
-              <% if params.dig(:search,:category_ids).nil? %>
-                <%= f.check_box :category_ids,{ multiple: true },category.id, nil %>
-              <% else %>
-                <%= f.check_box :category_ids,{ multiple: true, checked: params[:search][:category_ids].include?(category.id.to_s) },category.id, nil %>
-              <% end %>
-                <%= f.label category.name, class: 'text-pink-200 xs:text-xs sm:text-sm break-words', for: "search_category_ids_#{category.id}" %>
-            </div>
+
+<div class="flex w-full">
+  <div class="xs:w-32 sm:w-44 md:w-40 lg:w-52 xl:w-80 mt-20 fixed xs:left-3 sm:left-6 h-3/4 overflow-auto p-5 bg-twibg rounded-md search_condition">
+    <p class="text-lg font-bold text-gray-300 whitespace-nowrap">カテゴリー</p>
+    <div>
+      <%= form_with scope: :search, url: filter_path, method: :get, local: true do |f| %>
+        <% categories.each do |category| %>
+          <div>
+            <% if params.dig(:search,:category_ids).nil? %>
+              <%= f.check_box :category_ids,{ multiple: true },category.id, nil %>
+            <% else %>
+              <%= f.check_box :category_ids,{ multiple: true, checked: params[:search][:category_ids].include?(category.id.to_s) },category.id, nil %>
             <% end %>
-          <p class="text-lg font-bold text-gray-300 mt-3">メーカー</p>
-          <% makers.each do |maker| %>
-            <div>
-              <% if params.dig(:search,:maker_ids).nil? %>
-                <%= f.check_box :maker_ids,{ multiple: true }, maker.id, nil %>
-              <% else %>
-                <%= f.check_box :maker_ids,{ multiple: true, checked: params[:search][:maker_ids].include?(maker.id.to_s) }, maker.id, nil %>
-              <% end %>
-                <%= f.label maker.name, class: 'text-pink-200 xs:text-xs sm:text-sm break-words', for: "search_maker_ids_#{maker.id}" %>
-            </div>
+              <%= f.label category.name, class: 'text-pink-200 xs:text-xs sm:text-sm break-words', for: "search_category_ids_#{category.id}" %>
+          </div>
           <% end %>
-          <%= select_tag :sort, options_for_select({高評価順: "1", レビュー数が多い順: "2"}, params[:sort]),include_blank: "並び順", class: 'mt-10 bg-twibg border border-gray-600 text-gray-300 text-sm rounded focus:ring-purple-400 focus:ring-2 p-2 xs:w-full lg:w-auto truncate' %> <br>
-          <%= button_tag(type: "submit", class: 'mt-5') do %>
-            <div class="<%= btn %>">検索</div>
-          <% end %>
+        <p class="text-lg font-bold text-gray-300 mt-3">メーカー</p>
+        <% makers.each do |maker| %>
+          <div>
+            <% if params.dig(:search,:maker_ids).nil? %>
+              <%= f.check_box :maker_ids,{ multiple: true }, maker.id, nil %>
+            <% else %>
+              <%= f.check_box :maker_ids,{ multiple: true, checked: params[:search][:maker_ids].include?(maker.id.to_s) }, maker.id, nil %>
+            <% end %>
+              <%= f.label maker.name, class: 'text-pink-200 xs:text-xs sm:text-sm break-words', for: "search_maker_ids_#{maker.id}" %>
+          </div>
+        <% end %>
+        <%= select_tag :sort, options_for_select({高評価順: "1", レビュー数が多い順: "2"}, params[:sort]),include_blank: "並び順", class: 'mt-10 bg-twibg border border-gray-600 text-gray-300 text-sm rounded focus:ring-purple-400 focus:ring-2 p-2 xs:w-full lg:w-auto truncate' %> <br>
+        <%= button_tag(type: "submit", class: 'mt-5') do %>
+          <div class="<%= btn %>">検索</div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="w-full pb-5 xs:ml-36 sm:ml-48 lg:ml-60 xl:ml-96">
+    <p class="text-purple-300 font-black text-center w-full mt-10">Result</p>
+    <div class="mt-10 result_scroll result_list">
+      <div class="flex flex-wrap w-full justify-around gap-10">
+        <% items.each do |item| %>
+          <div class="shadow-lg rounded-md bg-twibg transform hover:scale-110 hover:opacity-75 duration-500 lg:w-48 xl:w-60 xs:w-40 xs:ml-3 sm:ml-0">
+            <%= link_to item_path(item), data: {"turbolinks" => false} do %>
+              <%= image_tag item.image.variant(resize: "600x600^", gravity: "center", crop: "600x600+0+0").processed, class: 'rounded' %>
+              <div class="py-4 text-sm text-center mt-2">
+                <span class="text-gray-300 font-black"><%= item.name %></span>
+                <div class="py-3  flex justify-center item_average<%= item.id %>"></div>
+                <script>
+                $('.item_average<%= item.id %>').empty();
+                $('.item_average<%= item.id %>').raty({
+                  size      : 36,
+                  starOff   : '<%= asset_path('star-off.png') %>',
+                  starHalf: '<%= asset_path('star-half.png') %>',
+                  starOn    : '<%= asset_path('star-on.png') %>',
+                  half      : false,
+                  readOnly: true,
+                  score: <%= item.review_rate_average %>,
+                });
+                </script>
+                <span class="text-gray-300"><i class="far fa-comment"></i> <%= item.review_amount %></span>
+              </div>
+            <% end %>
+          </div>
         <% end %>
       </div>
-    </div>
-    <div class="w-full pb-5 xs:ml-36 sm:ml-44 xl:ml-96">
-      <p class="text-purple-300 font-black text-center w-full mt-10">Result</p>
-      <div class="mt-10 result_scroll result_list">
-        <div class="flex flex-wrap w-full justify-around gap-10">
-          <% items.each do |item| %>
-            <div class="shadow-lg rounded-md bg-twibg transform hover:scale-110 hover:opacity-75 duration-500 lg:w-48 xl:w-60 xs:w-40 xs:ml-3 sm:ml-0">
-              <%= link_to item_path(item), data: {"turbolinks" => false} do %>
-                <%= image_tag item.image.variant(resize: "600x600^", gravity: "center", crop: "600x600+0+0").processed, class: 'rounded' %>
-                <div class="py-4 text-sm text-center mt-2">
-                  <span class="text-gray-300 font-black"><%= item.name %></span>
-                  <div class="py-3  flex justify-center item_average<%= item.id %>"></div>
-                  <script>
-                  $('.item_average<%= item.id %>').empty();
-                  $('.item_average<%= item.id %>').raty({
-                    size      : 36,
-                    starOff   : '<%= asset_path('star-off.png') %>',
-                    starHalf: '<%= asset_path('star-half.png') %>',
-                    starOn    : '<%= asset_path('star-on.png') %>',
-                    half      : false,
-                    readOnly: true,
-                    score: <%= item.review_rate_average %>,
-                  });
-                  </script>
-                  <span class="text-gray-300"><i class="far fa-comment"></i> <%= item.review_amount %></span>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-        <div class="hidden"><%= paginate items %></div>
-      </div>
+      <div class="hidden"><%= paginate items %></div>
     </div>
   </div>
 </div>
+
 
 <script>
   let count = 0;
