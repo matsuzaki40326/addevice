@@ -59,7 +59,7 @@ class ItemsController < ApplicationController
   def update
     item = Item.find(params[:id])
     if item.update(item_params)
-      redirect_to items_path, notice: "変更しました。"
+      redirect_to item_path(item), notice: "変更しました。"
     else
       redirect_to request.referer, alert: "変更に失敗しました。"
     end

@@ -1,8 +1,8 @@
 <div class="flex xs:flex-wrap xs:w-4/5 lg:w-full mx-auto justify-center py-10 rounded-md gap-5">
   <div class="shadow-lg bg-twibg xs:w-52 sm:w-72 rounded-md">
     <%= image_tag @item.image.variant(resize: "800x800^", gravity: "center", crop: "800x800+0+0").processed, class: 'w-full rounded' %>
-    <div class="relative text-center py-3">
-      <p class="text-gray-300 mt-3 font-bold"><%= @item.name %></p>
+    <div class="relative text-center py-4">
+      <p class="text-gray-300 mt-3 p-2 font-bold"><%= @item.name %></p>
       <div id="average"><%= render '/items/average', average: @average, review_count: @review_count %></div>
       <span id="favorite_btn<%= @item.id %>"><%= render '/items/favorite_btn', item: @item %></span>
       <% if current_user.admin? %>
