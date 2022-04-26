@@ -1,6 +1,6 @@
 
 <div class="flex w-full">
-  <div class="xs:w-32 sm:w-44 md:w-36 lg:w-52 xl:w-60 mt-10 fixed xs:left-3 sm:left-6 xl:left-20 h-4/5 overflow-auto p-5 bg-twibg rounded-md search_condition">
+  <div class="xs:w-32 sm:w-44 md:w-32 lg:w-52 xl:w-60 mt-10 fixed xs:left-3 sm:left-6 md:left-2 xl:left-20 h-4/5 overflow-auto p-5 bg-twibg rounded-md search_condition">
     <p class="text-lg font-bold text-gray-300 whitespace-nowrap">カテゴリー</p>
     <div>
       <%= form_with scope: :search, url: filter_path, method: :get, local: true do |f| %>
@@ -32,7 +32,7 @@
       <% end %>
     </div>
   </div>
-  <div class="w-full pb-5 xs:ml-36 sm:ml-48 lg:ml-60 xl:ml-96">
+  <div class="w-full pb-5 xs:ml-36 sm:ml-48 md:ml-56 lg:ml-64 xl:ml-96">
     <p class="text-purple-300 font-black text-center w-full mt-10">Result</p>
     <div class="mt-10 result_scroll result_list">
       <div class="flex flex-wrap w-full justify-around gap-10">
