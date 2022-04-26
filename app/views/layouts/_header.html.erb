@@ -1,58 +1,51 @@
-<nav class="flex items-center justify-between flex-wrap bg-gradient-to-tr xs:h-16 md:h-24 from-purple-900 to-pink-900 p-6 sticky top-0 z-10">
-    <div class="flex items-center flex-shrink-0 text-white mr-6">
-      <%= link_to "addevice", items_path, class: 'font-extrabold text-xl tracking-tight italic' %>
-    </div>
-    <div class="block lg:hidden">
-      <button class="flex items-center px-3 py-2 border rounded hover:text-white hover:border-white">
-      </button>
-    </div>
-    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-      <div class="text-sm lg:flex-grow">
-        <ul>
-          <% if user_signed_in? && current_user.admin? %>
-            <li class="block mt-4 lg:inline-block lg:mt-0 hover:text-white mr-4">
-              <%= link_to current_user do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              <% end %>
-            </li>
-            <li class="block mt-4 lg:inline-block lg:mt-0 hover:text-white mr-4">
-              <%= link_to users_path do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-              <% end %>
-            </li>
-            <li class="block mt-4 lg:inline-block lg:mt-0 hover:text-white mr-4">
-              <%= link_to filter_path, data: {"turbolinks" => false} do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-              <% end %>
-            </li>
-            <li class="block mt-4 lg:inline-block lg:mt-0 hover:text-white mr-4">
-              <%= link_to new_item_path do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              <% end %>
-            </li>
-            <li class="block mt-4 lg:inline-block lg:mt-0 hover:text-white mr-4">
-              <%= link_to destroy_user_session_path, method: :delete do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
-              <% end %>
-            </li>
-          <% elsif user_signed_in? %>
-            <li class="block mt-4 lg:inline-block lg:mt-0 hover:text-white mr-4">
-              <%= link_to current_user do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              <% end %>
-            </li>
-            <li class="block mt-4 lg:inline-block lg:mt-0 hover:text-white mr-4">
-              <%= link_to filter_path, data: {"turbolinks" => false} do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-              <% end %>
-            </li>
-            <li class="block mt-4 lg:inline-block lg:mt-0 hover:text-white mr-4">
-              <%= link_to destroy_user_session_path, method: :delete do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
-              <% end %>
-            </li>
+<nav class="flex items-center justify-between flex-wrap bg-gradient-to-tr from-purple-900 to-pink-900 sticky top-0 z-10 p-6">
+  <div class="flex items-center flex-shrink-0 text-white mr-6">
+    <%= link_to "addevice", items_path, class: 'font-extrabold text-xl tracking-tight italic' %>
+  </div>
+  <div class="text-sm">
+      <% if user_signed_in? && current_user.admin? %>
+        <div class="inline-block mt-4 text-white hover:text-pink-700 duration-300 mr-4">
+          <%= link_to current_user do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
           <% end %>
-        </ul>
-      </div>
+        </div>
+        <div class="inline-block mt-4 text-white hover:text-pink-700 duration-300 mr-4">
+          <%= link_to users_path do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+          <% end %>
+        </div>
+        <div class="inline-block mt-4 text-white hover:text-pink-700 duration-300 mr-4">
+          <%= link_to filter_path, data: {"turbolinks" => false} do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+          <% end %>
+        </div>
+        <div class="inline-block mt-4 text-white hover:text-pink-700 duration-300 mr-4">
+          <%= link_to new_item_path do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <% end %>
+        </div>
+        <div class="inline-block mt-4 text-white hover:text-pink-700 duration-300 mr-4">
+          <%= link_to destroy_user_session_path, method: :delete do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+          <% end %>
+        </div>
+      <% elsif user_signed_in? %>
+        <div class="inline-block mt-4 text-white hover:text-pink-700 duration-300 mr-4">
+          <%= link_to current_user do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <% end %>
+        </div>
+        <div class="inline-block mt-4 text-white hover:text-pink-700 duration-300 mr-4">
+          <%= link_to filter_path, data: {"turbolinks" => false} do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+          <% end %>
+        </div>
+        <div class="inline-block mt-4 text-white hover:text-pink-700 duration-300 mr-4">
+          <%= link_to destroy_user_session_path, method: :delete do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+          <% end %>
+        </div>
+      <% end %>
     </div>
-  </nav>
+  </div>
+</nav>
