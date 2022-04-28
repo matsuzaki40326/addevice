@@ -86,7 +86,7 @@
             $.each(range(min, max),function(index,num){
 
               let str = ".item_average" + gon.items[num].id
-
+              $(str).empty();
               $(str).raty({
                 size      : 36,
                 starOff   : '<%= asset_path('star-off.png') %>',
