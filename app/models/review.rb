@@ -4,7 +4,7 @@ class Review < ApplicationRecord
   has_many :goods, dependent: :destroy
 
 
-  validates :comment, presence: true, length: { maximum: 1000 }
+  validates :comment, presence: true, length: { maximum: 400 }
   validates :rate, presence: true
 
   def good_by?(user)
