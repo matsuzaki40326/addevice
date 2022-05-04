@@ -24,7 +24,7 @@
 - レビュー(使用感想)の投稿時
 
 ### ER図
-![Untitled Diagram drawio (1)](https://user-images.githubusercontent.com/98798507/166689381-c8e32e97-0af2-47b4-a316-46b7165d971b.png)
+![Untitled Diagram drawio](https://user-images.githubusercontent.com/98798507/166689530-59be6295-5867-4aae-992c-9741863665f0.png)
 
 
 ## 開発環境
