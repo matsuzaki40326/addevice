@@ -33,3 +33,6 @@
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Cloud9
+
+## 使用素材
+[ぱくたそ](https://www.pakutaso.com/) 様(背景画像)
