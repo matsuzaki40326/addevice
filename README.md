@@ -1,6 +1,9 @@
 # addevice 
 
+![port](https://user-images.githubusercontent.com/98798507/166685185-c5271899-1c62-418e-aaaa-77f5594c2760.jpeg)
+
 ## サイト概要
+
 ### サイトテーマ
 
 気になっているマウスやキーボードなどのデバイス情報を検索することができるレビューサイト。
@@ -20,7 +23,7 @@
 - 気になっているデバイスの検索時
 - レビュー(使用感想)の投稿時
 
-## ER図
+### ER図
 ![Untitled Diagram drawio](https://user-images.githubusercontent.com/98798507/166682544-a15640c0-d7d1-4d48-83df-ab4d43b91bd3.png)
 
 ## 開発環境
