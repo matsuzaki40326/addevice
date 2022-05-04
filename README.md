@@ -35,4 +35,5 @@
 - IDE：Cloud9
 
 ## 使用素材
-[ぱくたそ](https://www.pakutaso.com/) 様(背景画像)
+- [ぱくたそ](https://www.pakutaso.com/) 様(背景画像)
+- [ノーコピーライトガール](https://fromtheasia.com/category/illustration) 様(デフォルトユーザー画像)
