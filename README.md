@@ -24,7 +24,8 @@
 - レビュー(使用感想)の投稿時
 
 ### ER図
-![Untitled Diagram drawio](https://user-images.githubusercontent.com/98798507/166682544-a15640c0-d7d1-4d48-83df-ab4d43b91bd3.png)
+![Untitled Diagram drawio (2)](https://user-images.githubusercontent.com/98798507/166685877-759b95bb-78c6-45c3-b296-cda1fa90b9ae.png)
+
 
 ## 開発環境
 - OS：Linux(CentOS)
