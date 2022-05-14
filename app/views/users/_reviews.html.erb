@@ -11,6 +11,8 @@
               <i class="fas fa-edit hover:opacity-75"></i>
             <% end %>
           </div>
+        <% else %>
+          <div class="mt-5"></div>
         <% end %>
           <%= link_to item_path(review.item.id), class: 'font-bold break-words text-center pt-3 text-gray-300 hover:opacity-75' do %>
             <%= review.item.name %>
